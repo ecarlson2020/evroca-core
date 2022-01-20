@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-function Root(){
+function App(){
 	return <div></div>
 }
 
-ReactDOM.render(<Root />, document.querySelector('#root'));
+ReactDOM.render(<App />, document.querySelector('#root'));
