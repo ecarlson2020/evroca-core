@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "npm i && npx webpack-dev-server --mode development --devtool source-map",
-    "lint": "npx eslint --fix ./src"
+    "lint": " npx prettier --write ./src && npx eslint --fix ./src"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.17.0",
