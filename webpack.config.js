@@ -26,7 +26,7 @@ module.exports = {
       emitError: true,
       emitWarning: true,
       failOnError: true,
-      failOnWarning: true,
+      failOnWarning: false,
     }),
   ],
   output: {
@@ -36,6 +36,9 @@ module.exports = {
     open: true,
     static: {
       directory: path.join(__dirname, 'www'),
+    },
+    client: {
+      overlay: false,
     },
   }
 }
