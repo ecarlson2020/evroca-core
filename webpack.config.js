@@ -1,5 +1,4 @@
 const path = require('path');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -19,16 +18,15 @@ module.exports = {
     ]
   },
   plugins: [
-    new ErrorOverlayPlugin(),
     new ESLintPlugin({
       files: 'src/**/*.(js|jsx|ts|tsx)',
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      configFile: '.eslintrc.js',
+      overrideConfigFile: '.eslintrc.js',
       lintDirtyModulesOnly: true,
       emitError: true,
       emitWarning: true,
-      failOnError: false,
-      failOnWarning: false,
+      failOnError: true,
+      failOnWarning: true,
     }),
   ],
   output: {

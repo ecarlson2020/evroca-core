@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 function App(){
-	return <div>hey</div>
+	return <div>yeet</div>
 }
 
 ReactDOM.render(<App />, document.querySelector('#root'));
