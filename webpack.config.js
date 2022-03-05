@@ -22,7 +22,6 @@ module.exports = {
       files: 'src/**/*.(js|jsx|ts|tsx)',
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       overrideConfigFile: '.eslintrc.js',
-      lintDirtyModulesOnly: true,
       emitError: true,
       emitWarning: true,
       failOnError: true,
