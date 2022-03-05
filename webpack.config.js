@@ -7,12 +7,12 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: /src/, 
+        include: /src/,
         loader: "babel-loader"
       },
       {
         test: /\.css$/,
-        include: /src/, 
+        include: /src/,
         use: ["style-loader", "css-loader"]
       },
     ]
