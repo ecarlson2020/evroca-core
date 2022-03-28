@@ -23,6 +23,7 @@ module.exports = {
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
     "react/no-array-index-key": 0,
+    "no-shadow": 0,
     "arrow-body-style": ["error", "as-needed"],
   },
 };
