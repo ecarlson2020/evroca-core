@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "npm i && npx webpack-dev-server --mode development --devtool source-map",
-    "prod": "npm i && npx webpack --mode production",
+    "publish": "npm i && npx webpack --mode production",
     "lint": "npx eslint --fix ./src"
   },
   "devDependencies": {
