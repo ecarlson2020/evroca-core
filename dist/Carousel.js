@@ -17,7 +17,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-require("./index.css");
+require("./Carousel.css");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -100,12 +100,12 @@ function Carousel(_ref) {
     id: "evroca-carousel",
     style: style.car,
     ref: setMyRef
-  }, children.map(function (el, i) {
+  }, Array.isArray(children) ? children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
       key: i,
       style: style.item
     }, el);
-  }))));
+  }) : "Requires elements to be passed")));
 } // PropTypes
 
 
