@@ -8,7 +8,8 @@
     "start": "npm i && npx webpack-dev-server --mode development --devtool source-map",
     "compile": "npm i && npx webpack --mode production",
     "lint": "npx eslint --fix ./src",
-    "npm:compile": "rm -rf dist && mkdir dist && babel src/components -d dist --copy-files"
+    "npm:compile": "rm -rf dist && mkdir dist && babel src/components -d dist --copy-files",
+    "npm:publish": "npm run npm:compile; git add .; gitcommit compile; git push; npm version patch; git push; npm publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -33,8 +34,8 @@
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.3.0"
   },
-  "name": "evroca-core",
-  "version": "1.0.0",
+  "name": "@evroca/core",
+  "version": "0.1.0",
   "description": "Test Description",
   "main": "./dist/index.js",
   "repository": {
