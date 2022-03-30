@@ -3,7 +3,13 @@ import ReactDOM from "react-dom";
 import Carousel from "./components/Carousel";
 
 function App() {
-  return <Carousel>hey</Carousel>;
+  return (
+    <Carousel>
+      <div style={{ background: "red" }}>hey</div>
+      <div style={{ background: "red" }}>hey</div>
+      <div style={{ background: "red" }}>hey</div>
+    </Carousel>
+  );
 }
 
 ReactDOM.render(<App />, document.querySelector("#root"));
