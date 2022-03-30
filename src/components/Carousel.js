@@ -63,11 +63,13 @@ export default function Carousel({ children }) {
         {drawChevron(true)}
         {drawChevron(false)}
         <div id="evroca-carousel" style={style.car} ref={setMyRef}>
-          {children.map((el, i) => (
-            <div key={i} style={style.item}>
-              {el}
-            </div>
-          ))}
+          {Array.isArray(children)
+            ? children.map((el, i) => (
+                <div key={i} style={style.item}>
+                  {el}
+                </div>
+              ))
+            : "Requires elements to be passed"}
         </div>
       </div>
     </div>
