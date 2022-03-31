@@ -28,14 +28,15 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var style = {
-  car: {
-    display: "flex",
+  carousel: {
     whiteSpace: "nowrap",
     overflowX: "auto",
     scrollBehavior: "smooth"
   },
   item: {
-    width: "calc(25% - 20px)",
+    whiteSpace: "normal",
+    display: "inline-block",
+    width: "400px",
     whitespace: "normal",
     padding: "10px"
   },
@@ -98,7 +99,7 @@ function Carousel(_ref) {
     }
   }, drawChevron(true), drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel",
-    style: style.car,
+    style: style.carousel,
     ref: setMyRef
   }, Array.isArray(children) ? children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
