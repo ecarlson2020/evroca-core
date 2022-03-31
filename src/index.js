@@ -20,6 +20,18 @@ function App() {
       <div style={{ background: "red" }}>
         <h3>5</h3>
       </div>
+      <div style={{ background: "red" }}>
+        <h3>5</h3>
+      </div>
+      <div style={{ background: "red" }}>
+        <h3>5</h3>
+      </div>
+      <div style={{ background: "red" }}>
+        <h3>5</h3>
+      </div>
+      <div style={{ background: "red" }}>
+        <h3>5</h3>
+      </div>
     </Carousel>
   );
 }

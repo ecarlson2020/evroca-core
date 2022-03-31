@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 import "./Carousel.css";
 
 export default function Carousel({ children }) {
-  const [myRef, setMyRef] = useState(null);
+  const [innerRef, setInnerRef] = useState(null);
+  const [outerRef, setOuterRef] = useState(null);
 
   const handleClick = (isLeft) => {
     // adjust this based on padding
-    const thisMuch = myRef.offsetWidth + 20;
+    const thisMuch = innerRef.offsetWidth;
     if (isLeft) {
-      myRef.scrollLeft -= thisMuch;
+      outerRef.scrollLeft -= thisMuch;
     } else {
-      myRef.scrollLeft += thisMuch;
+      outerRef.scrollLeft += thisMuch;
     }
   };
 
@@ -40,11 +41,15 @@ export default function Carousel({ children }) {
       <div style={{ position: "relative" }}>
         {drawChevron(true)}
         {drawChevron(false)}
-        <div id="evroca-carousel" ref={setMyRef}>
+        <div id="evroca-carousel" ref={setOuterRef}>
           {Array.isArray(children)
             ? children.map((el, i) => (
-                <div key={i} className="evroca-carousel-item">
-                  {el}
+                <div
+                  key={i}
+                  className="evroca-carousel-item"
+                  {...(i === 0 ? { ref: setInnerRef } : {})}
+                >
+                  <div className="evroca-carousel-inner">{el}</div>
                 </div>
               ))
             : "Requires elements to be passed"}
