@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Carousel from "./components";
+import Carousel from "./exported";
 import MyTest from "./components/MyTest";
 
 function App() {
