@@ -2,36 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./Carousel.css";
 
-const style = {
-  carousel: {
-    whiteSpace: "nowrap",
-    overflowX: "auto",
-    scrollBehavior: "smooth",
-  },
-  item: {
-    whiteSpace: "normal",
-    display: "inline-block",
-    width: "25%",
-    whitespace: "normal",
-    padding: "10px",
-  },
-  chevron: {
-    position: "absolute",
-    top: "calc(50% - 35px / 2)",
-    width: "35px",
-    height: "35px",
-    textAlign: "center",
-    borderRadius: "100%",
-    background: "rgba(0,0,0,0.3)",
-    color: "#fff",
-  },
-};
-
 export default function Carousel({ children }) {
   const [myRef, setMyRef] = useState(null);
 
   const handleClick = (isLeft) => {
-    const thisMuch = window.innerWidth / 4;
+    // adjust this based on padding
+    const thisMuch = myRef.offsetWidth + 20;
     if (isLeft) {
       myRef.scrollLeft -= thisMuch;
     } else {
@@ -50,7 +26,8 @@ export default function Carousel({ children }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        style={{ ...style.chevron, ...conditionalStyle }}
+        className="evroca-chevron"
+        style={{ ...conditionalStyle }}
         onClick={() => handleClick(isLeft)}
       >
         <polyline points={isLeft ? "15 18 9 12 15 6" : "9 18 15 12 9 6"} />
@@ -63,10 +40,10 @@ export default function Carousel({ children }) {
       <div style={{ position: "relative" }}>
         {drawChevron(true)}
         {drawChevron(false)}
-        <div id="evroca-carousel" style={style.carousel} ref={setMyRef}>
+        <div id="evroca-carousel" ref={setMyRef}>
           {Array.isArray(children)
             ? children.map((el, i) => (
-                <div key={i} style={style.item}>
+                <div key={i} className="evroca-carousel-item">
                   {el}
                 </div>
               ))
