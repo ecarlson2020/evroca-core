@@ -1,17 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Carousel from "./exported";
-import MyTest from "./components/MyTest";
 
 function App() {
   return (
     <Carousel>
-      <MyTest />
-      <MyTest />
-      <MyTest />
-      <MyTest />
-      <MyTest />
-      <MyTest />
+      <div>
+        <h3>1</h3>
+      </div>
+      <div>
+        <h3>2</h3>
+      </div>
+      <div>
+        <h3>3</h3>
+      </div>
+      <div>
+        <h3>4</h3>
+      </div>
+      <div>
+        <h3>5</h3>
+      </div>
     </Carousel>
   );
 }

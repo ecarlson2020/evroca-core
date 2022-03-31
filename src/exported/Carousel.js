@@ -11,7 +11,7 @@ const style = {
   item: {
     whiteSpace: "normal",
     display: "inline-block",
-    width: "400px",
+    width: "25%",
     whitespace: "normal",
     padding: "10px",
   },
