@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = Carousel;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
@@ -27,46 +29,27 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var style = {
-  carousel: {
-    whiteSpace: "nowrap",
-    overflowX: "auto",
-    scrollBehavior: "smooth"
-  },
-  item: {
-    whiteSpace: "normal",
-    display: "inline-block",
-    width: "400px",
-    whitespace: "normal",
-    padding: "10px"
-  },
-  chevron: {
-    position: "absolute",
-    top: "calc(50% - 35px / 2)",
-    width: "35px",
-    height: "35px",
-    textAlign: "center",
-    borderRadius: "100%",
-    background: "rgba(0,0,0,0.3)",
-    color: "#fff"
-  }
-};
-
 function Carousel(_ref) {
   var children = _ref.children;
 
   var _useState = (0, _react.useState)(null),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
-      myRef = _useState2[0],
-      setMyRef = _useState2[1];
+      innerRef = _useState2[0],
+      setInnerRef = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = (0, _slicedToArray2["default"])(_useState3, 2),
+      outerRef = _useState4[0],
+      setOuterRef = _useState4[1];
 
   var handleClick = function handleClick(isLeft) {
-    var thisMuch = window.innerWidth / 4;
+    // adjust this based on padding
+    var thisMuch = innerRef.offsetWidth;
 
     if (isLeft) {
-      myRef.scrollLeft -= thisMuch;
+      outerRef.scrollLeft -= thisMuch;
     } else {
-      myRef.scrollLeft += thisMuch;
+      outerRef.scrollLeft += thisMuch;
     }
   };
 
@@ -84,7 +67,8 @@ function Carousel(_ref) {
       strokeWidth: "2",
       strokeLinecap: "round",
       strokeLinejoin: "round",
-      style: _objectSpread(_objectSpread({}, style.chevron), conditionalStyle),
+      className: "evroca-chevron",
+      style: _objectSpread({}, conditionalStyle),
       onClick: function onClick() {
         return handleClick(isLeft);
       }
@@ -99,13 +83,16 @@ function Carousel(_ref) {
     }
   }, drawChevron(true), drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel",
-    style: style.carousel,
-    ref: setMyRef
+    ref: setOuterRef
   }, Array.isArray(children) ? children.map(function (el, i) {
-    return /*#__PURE__*/_react["default"].createElement("div", {
+    return /*#__PURE__*/_react["default"].createElement("div", (0, _extends2["default"])({
       key: i,
-      style: style.item
-    }, el);
+      className: "evroca-carousel-item"
+    }, i === 0 ? {
+      ref: setInnerRef
+    } : {}), /*#__PURE__*/_react["default"].createElement("div", {
+      className: "evroca-carousel-inner"
+    }, el));
   }) : "Requires elements to be passed")));
 } // PropTypes
 
