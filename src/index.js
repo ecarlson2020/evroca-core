@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Carousel from "./components";
+import MyTest from "./components/MyTest";
 
 function App() {
   return (
     <Carousel>
-      <div style={{ background: "red" }}>hey</div>
-      <div style={{ background: "red" }}>hey</div>
-      <div style={{ background: "red" }}>hey</div>
+      <MyTest />
+      <MyTest />
+      <MyTest />
+      <MyTest />
+      <MyTest />
+      <MyTest />
     </Carousel>
   );
 }

@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import "./Carousel.css";
 
 const style = {
-  car: {
-    display: "flex",
+  carousel: {
     whiteSpace: "nowrap",
     overflowX: "auto",
     scrollBehavior: "smooth",
   },
   item: {
-    width: "calc(25% - 20px)",
+    whiteSpace: "normal",
+    display: "inline-block",
+    width: "400px",
     whitespace: "normal",
     padding: "10px",
   },
@@ -62,7 +63,7 @@ export default function Carousel({ children }) {
       <div style={{ position: "relative" }}>
         {drawChevron(true)}
         {drawChevron(false)}
-        <div id="evroca-carousel" style={style.car} ref={setMyRef}>
+        <div id="evroca-carousel" style={style.carousel} ref={setMyRef}>
           {Array.isArray(children)
             ? children.map((el, i) => (
                 <div key={i} style={style.item}>
