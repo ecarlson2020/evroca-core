@@ -36,7 +36,7 @@
     "webpack-dev-server": "^4.3.0"
   },
   "name": "@evroca/core",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Test Description",
   "main": "./dist/index.js",
   "repository": {
