@@ -5,6 +5,7 @@
 #evroca-carousel{
   white-space: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior:smooth;
 }
 .evroca-carousel-item{
