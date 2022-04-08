@@ -14,9 +14,6 @@
   width:25%;
   white-space:normal;
 }
-.evroca-carousel-inner{
-  padding:10px;
-}
 @media screen and (max-width: 600px) {
   .evroca-carousel-item{
     width:100%;
