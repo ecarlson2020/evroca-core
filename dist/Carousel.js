@@ -42,15 +42,23 @@ function Carousel(_ref) {
       outerRef = _useState4[0],
       setOuterRef = _useState4[1];
 
-  var handleClick = function handleClick(isLeft) {
-    // adjust this based on padding
-    var thisMuch = innerRef.offsetWidth;
+  var _useState5 = (0, _react.useState)(1),
+      _useState6 = (0, _slicedToArray2["default"])(_useState5, 2),
+      numSlidesOnScreen = _useState6[0],
+      setNumSlidesOnScreen = _useState6[1];
 
-    if (isLeft) {
-      outerRef.scrollLeft -= thisMuch;
-    } else {
-      outerRef.scrollLeft += thisMuch;
-    }
+  var _useState7 = (0, _react.useState)(0),
+      _useState8 = (0, _slicedToArray2["default"])(_useState7, 2),
+      currentSlide = _useState8[0],
+      setCurrentSlide = _useState8[1];
+
+  var onScroll = function onScroll() {
+    setCurrentSlide(Math.trunc(Math.ceil(outerRef.scrollLeft) / innerRef.offsetWidth));
+    setNumSlidesOnScreen(Math.trunc(window.innerWidth / innerRef.scrollWidth));
+  };
+
+  var chevronOnClick = function chevronOnClick(isLeft) {
+    outerRef.scrollLeft = isLeft ? (currentSlide - 1) * innerRef.offsetWidth : (currentSlide + 1) * innerRef.offsetWidth;
   };
 
   var drawChevron = function drawChevron(isLeft) {
@@ -70,11 +78,15 @@ function Carousel(_ref) {
       className: "evroca-chevron",
       style: _objectSpread({}, conditionalStyle),
       onClick: function onClick() {
-        return handleClick(isLeft);
+        return chevronOnClick(isLeft);
       }
     }, /*#__PURE__*/_react["default"].createElement("polyline", {
       points: isLeft ? "15 18 9 12 15 6" : "9 18 15 12 9 6"
     }));
+  };
+
+  var circleOnClick = function circleOnClick(index) {
+    outerRef.scrollLeft = innerRef.offsetWidth * index;
   };
 
   return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
@@ -83,7 +95,9 @@ function Carousel(_ref) {
     }
   }, drawChevron(true), drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel",
-    ref: setOuterRef
+    ref: setOuterRef,
+    onScroll: onScroll,
+    onLoad: onScroll
   }, Array.isArray(children) ? children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", (0, _extends2["default"])({
       key: i,
@@ -93,7 +107,19 @@ function Carousel(_ref) {
     } : {}), /*#__PURE__*/_react["default"].createElement("div", {
       className: "evroca-carousel-inner"
     }, el));
-  }) : "Requires elements to be passed")));
+  }) : "Requires elements to be passed")), /*#__PURE__*/_react["default"].createElement("div", {
+    id: "evroca-carousel-circles"
+  }, Array.isArray(children) && children.map(function (el, i) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      className: "evroca-carousel-circle".concat(i >= currentSlide && i < currentSlide + numSlidesOnScreen ? " active" : ""),
+      "aria-hidden": "true",
+      type: "button",
+      key: i,
+      onClick: function onClick() {
+        return circleOnClick(i);
+      }
+    });
+  })));
 } // PropTypes
 
 
