@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./Carousel.css";
 
 export default function Carousel({ children }) {
   const [innerRef, setInnerRef] = useState(null);
   const [outerRef, setOuterRef] = useState(null);
-  useEffect(() => {
-    if (outerRef) {
-      outerRef.addEventListener("scroll", () => {
-        console.log(outerRef.scrollLeft, window.innerWidth);
-      });
-    }
-  }, [outerRef]);
+  const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  console.log(currentSlide, numSlidesOnScreen);
 
-  const handleClick = (isLeft) => {
-    // adjust this based on padding
-    const thisMuch = innerRef.offsetWidth;
-    if (isLeft) {
-      outerRef.scrollLeft -= thisMuch;
-    } else {
-      outerRef.scrollLeft += thisMuch;
-    }
+  const onScroll = () => {
+    setCurrentSlide(
+      Math.trunc(Math.ceil(outerRef.scrollLeft) / innerRef.offsetWidth)
+    );
+    setNumSlidesOnScreen(Math.trunc(window.innerWidth / innerRef.scrollWidth));
+  };
+
+  const chevronOnClick = (isLeft) => {
+    outerRef.scrollLeft = isLeft
+      ? (currentSlide - 1) * innerRef.offsetWidth
+      : (currentSlide + 1) * innerRef.offsetWidth;
   };
 
   const drawChevron = (isLeft) => {
@@ -36,7 +35,7 @@ export default function Carousel({ children }) {
         strokeLinejoin="round"
         className="evroca-chevron"
         style={{ ...conditionalStyle }}
-        onClick={() => handleClick(isLeft)}
+        onClick={() => chevronOnClick(isLeft)}
       >
         <polyline points={isLeft ? "15 18 9 12 15 6" : "9 18 15 12 9 6"} />
       </svg>
@@ -44,8 +43,8 @@ export default function Carousel({ children }) {
   };
 
   const circleOnClick = (index) => {
-    document.getElementById("evroca-carousel").scrollLeft =
-      innerRef.offsetWidth * index;
+    console.log(innerRef.offsetWidth * index);
+    outerRef.scrollLeft = innerRef.offsetWidth * index;
   };
 
   return (
@@ -53,7 +52,7 @@ export default function Carousel({ children }) {
       <div style={{ position: "relative" }}>
         {drawChevron(true)}
         {drawChevron(false)}
-        <div id="evroca-carousel" ref={setOuterRef}>
+        <div id="evroca-carousel" ref={setOuterRef} onScroll={onScroll}>
           {Array.isArray(children)
             ? children.map((el, i) => (
                 <div
@@ -71,7 +70,9 @@ export default function Carousel({ children }) {
         {Array.isArray(children) &&
           children.map((el, i) => (
             <div
-              className="evroca-carousel-circle"
+              className={`evroca-carousel-circle${
+                i === currentSlide ? " active" : ""
+              }`}
               aria-hidden="true"
               type="button"
               key={i}

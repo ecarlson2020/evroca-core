@@ -7,12 +7,12 @@ function App() {
   return (
     <Carousel>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => (
-        <img
-          key={el}
-          src="https://ballandkeg.com/images/ball_and_keg_logo.jpg"
-          alt="test"
-          style={{ border: "1px solid red" }}
-        />
+        <div key={el} style={{ border: "10px solid red" }}>
+          <img
+            src="https://ballandkeg.com/images/ball_and_keg_logo.jpg"
+            alt="test"
+          />
+        </div>
       ))}
     </Carousel>
   );

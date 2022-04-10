@@ -47,3 +47,6 @@
 .evroca-carousel-circle:last-child{
   margin-right:0;
 }
+.evroca-carousel-circle.active{
+  background:#888;
+}
