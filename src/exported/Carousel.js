@@ -68,17 +68,16 @@ export default function Carousel({ children }) {
         </div>
       </div>
       <div id="evroca-carousel-circles">
-        {Array.isArray(children)
-          ? children.map((el, i) => (
-              <div
-                className="evroca-carousel-circle"
-                aria-hidden="true"
-                type="button"
-                key={i}
-                onClick={() => circleOnClick(i)}
-              />
-            ))
-          : "Requires elements to be passed"}
+        {Array.isArray(children) &&
+          children.map((el, i) => (
+            <div
+              className="evroca-carousel-circle"
+              aria-hidden="true"
+              type="button"
+              key={i}
+              onClick={() => circleOnClick(i)}
+            />
+          ))}
       </div>
     </div>
   );
