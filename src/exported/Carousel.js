@@ -8,7 +8,7 @@ export default function Carousel({ children }) {
   useEffect(() => {
     if (outerRef) {
       outerRef.addEventListener("scroll", () => {
-        console.log(outerRef.scrollLeft);
+        console.log(outerRef.scrollLeft, window.innerWidth);
       });
     }
   }, [outerRef]);
