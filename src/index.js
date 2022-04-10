@@ -8,10 +8,7 @@ function App() {
     <Carousel>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => (
         <div key={el} style={{ border: "10px solid red" }}>
-          <img
-            src="https://ballandkeg.com/images/ball_and_keg_logo.jpg"
-            alt="test"
-          />
+          <img src="https://picsum.photos/200/300" alt="test" />
         </div>
       ))}
     </Carousel>

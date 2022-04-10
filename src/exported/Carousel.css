@@ -15,11 +15,6 @@
   width:25%;
   white-space:normal;
 }
-@media screen and (max-width:600px) {
-  .evroca-carousel-item{
-    width:100%;
-  }
-}
 .evroca-chevron{
   position:absolute;
   top:calc(50% - 35px / 2);
@@ -37,16 +32,29 @@
   justify-content:center;
 }
 .evroca-carousel-circle{
-  border:2px solid #888;
+  border:2px solid #bbb;
   background:#fff;
   border-radius:100%;
-  width:8px;
-  height:8px;
-  margin:5px 5px 0 0;
+  width:5px;
+  height:5px;
+  margin:16px 8px 0 0;
+  transition:all 0.3s ease-in-out;
 }
 .evroca-carousel-circle:last-child{
   margin-right:0;
 }
 .evroca-carousel-circle.active{
-  background:#888;
+  background:#999;
+  border:2px solid #999;
+  transform:scale(1.3);
+}
+@media screen and (max-width:900px) {
+  .evroca-carousel-item{
+    width:50%;
+  }
+}
+@media screen and (max-width:600px) {
+  .evroca-carousel-item{
+    width:100%;
+  }
 }
