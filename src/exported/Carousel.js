@@ -50,7 +50,12 @@ export default function Carousel({ children }) {
       <div style={{ position: "relative" }}>
         {drawChevron(true)}
         {drawChevron(false)}
-        <div id="evroca-carousel" ref={setOuterRef} onScroll={onScroll}>
+        <div
+          id="evroca-carousel"
+          ref={setOuterRef}
+          onScroll={onScroll}
+          onLoad={onScroll}
+        >
           {Array.isArray(children)
             ? children.map((el, i) => (
                 <div
