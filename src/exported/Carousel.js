@@ -7,7 +7,6 @@ export default function Carousel({ children }) {
   const [outerRef, setOuterRef] = useState(null);
   const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
   const [currentSlide, setCurrentSlide] = useState(0);
-  console.log(currentSlide, numSlidesOnScreen);
 
   const onScroll = () => {
     setCurrentSlide(
@@ -43,7 +42,6 @@ export default function Carousel({ children }) {
   };
 
   const circleOnClick = (index) => {
-    console.log(innerRef.offsetWidth * index);
     outerRef.scrollLeft = innerRef.offsetWidth * index;
   };
 
@@ -71,7 +69,9 @@ export default function Carousel({ children }) {
           children.map((el, i) => (
             <div
               className={`evroca-carousel-circle${
-                i === currentSlide ? " active" : ""
+                i >= currentSlide && i < currentSlide + numSlidesOnScreen
+                  ? " active"
+                  : ""
               }`}
               aria-hidden="true"
               type="button"
