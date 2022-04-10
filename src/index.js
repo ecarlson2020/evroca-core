@@ -11,6 +11,7 @@ function App() {
           key={el}
           src="https://ballandkeg.com/images/ball_and_keg_logo.jpg"
           alt="test"
+          style={{ border: "1px solid red" }}
         />
       ))}
     </Carousel>

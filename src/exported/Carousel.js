@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./Carousel.css";
 
 export default function Carousel({ children }) {
   const [innerRef, setInnerRef] = useState(null);
   const [outerRef, setOuterRef] = useState(null);
+  useEffect(() => {
+    if (outerRef) {
+      outerRef.addEventListener("scroll", () => {
+        console.log(outerRef.scrollLeft);
+      });
+    }
+  }, [outerRef]);
 
   const handleClick = (isLeft) => {
     // adjust this based on padding
@@ -61,11 +68,17 @@ export default function Carousel({ children }) {
         </div>
       </div>
       <div id="evroca-carousel-circles">
-        {children.map((el, i) => (
-          <button type="button" key={i} onClick={() => circleOnClick(i)}>
-            {i}
-          </button>
-        ))}
+        {Array.isArray(children)
+          ? children.map((el, i) => (
+              <div
+                className="evroca-carousel-circle"
+                aria-hidden="true"
+                type="button"
+                key={i}
+                onClick={() => circleOnClick(i)}
+              />
+            ))
+          : "Requires elements to be passed"}
       </div>
     </div>
   );
