@@ -36,6 +36,11 @@ export default function Carousel({ children }) {
     );
   };
 
+  const circleOnClick = (index) => {
+    document.getElementById("evroca-carousel").scrollLeft =
+      innerRef.offsetWidth * index;
+  };
+
   return (
     <div>
       <div style={{ position: "relative" }}>
@@ -54,6 +59,13 @@ export default function Carousel({ children }) {
               ))
             : "Requires elements to be passed"}
         </div>
+      </div>
+      <div id="evroca-carousel-circles">
+        {children.map((el, i) => (
+          <button type="button" key={i} onClick={() => circleOnClick(i)}>
+            {i}
+          </button>
+        ))}
       </div>
     </div>
   );
