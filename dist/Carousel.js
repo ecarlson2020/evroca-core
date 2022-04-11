@@ -53,7 +53,7 @@ function Carousel(_ref) {
       currentSlide = _useState8[0],
       setCurrentSlide = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(null),
+  var _useState9 = (0, _react.useState)(window.innerWidth),
       _useState10 = (0, _slicedToArray2["default"])(_useState9, 2),
       screenWidth = _useState10[0],
       setScreenWidth = _useState10[1];
