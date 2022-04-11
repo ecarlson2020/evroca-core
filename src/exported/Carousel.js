@@ -7,13 +7,17 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const [outerRef, setOuterRef] = useState(null);
   const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(null);
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      setScreenWidth(window.innerWidth);
-    });
-  }, []);
+    if (!screenWidth && outerRef) {
+      setScreenWidth(outerRef.offsetWidth);
+
+      window.addEventListener("resize", () => {
+        setScreenWidth(outerRef.offsetWidth);
+      });
+    }
+  }, [outerRef]);
 
   const onScroll = () => {
     setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
