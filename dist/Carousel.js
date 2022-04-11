@@ -53,16 +53,19 @@ function Carousel(_ref) {
       currentSlide = _useState8[0],
       setCurrentSlide = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(window.innerWidth),
+  var _useState9 = (0, _react.useState)(null),
       _useState10 = (0, _slicedToArray2["default"])(_useState9, 2),
       screenWidth = _useState10[0],
       setScreenWidth = _useState10[1];
 
   (0, _react.useEffect)(function () {
-    window.addEventListener("resize", function () {
-      setScreenWidth(window.innerWidth);
-    });
-  }, []);
+    if (!screenWidth && outerRef) {
+      setScreenWidth(outerRef.offsetWidth);
+      window.addEventListener("resize", function () {
+        setScreenWidth(outerRef.offsetWidth);
+      });
+    }
+  }, [outerRef]);
 
   var onScroll = function onScroll() {
     setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
