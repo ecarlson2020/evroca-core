@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./Carousel.css";
 
-export default function Carousel({ children }) {
+export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const [innerRef, setInnerRef] = useState(null);
   const [outerRef, setOuterRef] = useState(null);
   const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(null);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setScreenWidth(window.innerWidth);
+    });
+  }, []);
 
   const onScroll = () => {
     setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
-    setNumSlidesOnScreen(Math.round(window.outerWidth / innerRef.offsetWidth));
+    setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
   };
 
   const chevronOnClick = (isLeft) => {
@@ -43,6 +50,19 @@ export default function Carousel({ children }) {
     outerRef.scrollLeft = innerRef.offsetWidth * index;
   };
 
+  const getCarouselItemWidth = () => {
+    if (numberOfSlidesOnScreen !== 4) {
+      return (1 / numberOfSlidesOnScreen) * 100;
+    }
+    if (screenWidth < 600) {
+      return 100;
+    }
+    if (screenWidth < 900) {
+      return 50;
+    }
+    return 25;
+  };
+
   return (
     <div>
       <div style={{ position: "relative" }}>
@@ -60,6 +80,7 @@ export default function Carousel({ children }) {
                   key={i}
                   className="evroca-carousel-item"
                   {...(i === 0 ? { ref: setInnerRef } : {})}
+                  style={{ width: `${getCarouselItemWidth()}%` }}
                 >
                   <div className="evroca-carousel-inner">{el}</div>
                 </div>
@@ -90,4 +111,8 @@ export default function Carousel({ children }) {
 // PropTypes
 Carousel.propTypes = {
   children: PropTypes.node.isRequired,
+  numberOfSlidesOnScreen: PropTypes.number,
+};
+Carousel.defaultProps = {
+  numberOfSlidesOnScreen: 4,
 };
