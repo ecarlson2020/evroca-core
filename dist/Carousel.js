@@ -30,7 +30,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function Carousel(_ref) {
-  var children = _ref.children;
+  var children = _ref.children,
+      numberOfSlidesOnScreen = _ref.numberOfSlidesOnScreen;
 
   var _useState = (0, _react.useState)(null),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -52,9 +53,20 @@ function Carousel(_ref) {
       currentSlide = _useState8[0],
       setCurrentSlide = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = (0, _slicedToArray2["default"])(_useState9, 2),
+      screenWidth = _useState10[0],
+      setScreenWidth = _useState10[1];
+
+  (0, _react.useEffect)(function () {
+    window.addEventListener("resize", function () {
+      setScreenWidth(window.innerWidth);
+    });
+  }, []);
+
   var onScroll = function onScroll() {
-    setCurrentSlide(Math.trunc(Math.ceil(outerRef.scrollLeft) / innerRef.offsetWidth));
-    setNumSlidesOnScreen(Math.trunc(window.innerWidth / innerRef.scrollWidth));
+    setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
+    setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
   };
 
   var chevronOnClick = function chevronOnClick(isLeft) {
@@ -89,6 +101,22 @@ function Carousel(_ref) {
     outerRef.scrollLeft = innerRef.offsetWidth * index;
   };
 
+  var getCarouselItemWidth = function getCarouselItemWidth() {
+    if (numberOfSlidesOnScreen !== 4) {
+      return 1 / numberOfSlidesOnScreen * 100;
+    }
+
+    if (screenWidth < 600) {
+      return 100;
+    }
+
+    if (screenWidth < 900) {
+      return 50;
+    }
+
+    return 25;
+  };
+
   return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       position: "relative"
@@ -104,7 +132,11 @@ function Carousel(_ref) {
       className: "evroca-carousel-item"
     }, i === 0 ? {
       ref: setInnerRef
-    } : {}), /*#__PURE__*/_react["default"].createElement("div", {
+    } : {}, {
+      style: {
+        width: "".concat(getCarouselItemWidth(), "%")
+      }
+    }), /*#__PURE__*/_react["default"].createElement("div", {
       className: "evroca-carousel-inner"
     }, el));
   }) : "Requires elements to be passed")), /*#__PURE__*/_react["default"].createElement("div", {
@@ -124,5 +156,9 @@ function Carousel(_ref) {
 
 
 Carousel.propTypes = {
-  children: _propTypes["default"].node.isRequired
+  children: _propTypes["default"].node.isRequired,
+  numberOfSlidesOnScreen: _propTypes["default"].number
+};
+Carousel.defaultProps = {
+  numberOfSlidesOnScreen: 4
 };
