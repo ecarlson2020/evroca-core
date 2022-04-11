@@ -7,7 +7,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const [outerRef, setOuterRef] = useState(null);
   const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [screenWidth, setScreenWidth] = useState(null);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
