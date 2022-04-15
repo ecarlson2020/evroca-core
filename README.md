@@ -2,8 +2,8 @@
 ## Installation
 ```npm i @evroca/core```
 ## Usage
+### App.js:
 ```
-App.js:
 import React from 'react';
 import Carousel from '@evroca/core';
 import SomeReactComponent from './components/SomeReactComponent';
