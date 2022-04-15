@@ -18,6 +18,7 @@ function App() {
         alt="Item 3"
         style={{ width: "100%" }}
       />
+      <div>Item 4</div>
       <div>Item 5</div>
       <div>Item 6</div>
       <div>Item 7</div>
