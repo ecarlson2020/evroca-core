@@ -1,4 +1,5 @@
 # React Carousel
+This package contains a simple React Carousel. It is compatible with React v17. To use, simply import the `Carousel` component, and then add children into the Carousel, as shown in the "Usage" section below. See the "Demo" section below for a demo video.
 ## Installation
 ```npm i @evroca/core```
 ## Usage
