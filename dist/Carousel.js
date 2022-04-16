@@ -58,13 +58,19 @@ function Carousel(_ref) {
       screenWidth = _useState10[0],
       setScreenWidth = _useState10[1];
 
+  var changeScreenWidth = function changeScreenWidth() {
+    setScreenWidth(outerRef.offsetWidth);
+  };
+
   (0, _react.useEffect)(function () {
     if (!screenWidth && outerRef) {
-      setScreenWidth(outerRef.offsetWidth);
-      window.addEventListener("resize", function () {
-        setScreenWidth(outerRef.offsetWidth);
-      });
+      changeScreenWidth();
+      window.addEventListener("resize", changeScreenWidth);
     }
+
+    return function () {
+      return window.removeEventListener("resize", changeScreenWidth);
+    };
   }, [outerRef]);
 
   var onScroll = function onScroll() {
