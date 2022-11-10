@@ -97,9 +97,9 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
             : children}
         </div>
       </div>
-      <div id="evroca-carousel-circles">
-        {Array.isArray(children) &&
-          children.map((el, i) => (
+      {Array.isArray(children) && (
+        <div id="evroca-carousel-circles">
+          {children.map((el, i) => (
             <div
               className={`evroca-carousel-circle${
                 i >= currentSlide && i < currentSlide + numSlidesOnScreen
@@ -112,7 +112,8 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
               onClick={() => circleOnClick(i)}
             />
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

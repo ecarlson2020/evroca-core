@@ -150,9 +150,9 @@ function Carousel(_ref) {
     }), /*#__PURE__*/_react["default"].createElement("div", {
       className: "evroca-carousel-inner"
     }, el));
-  }) : children)), /*#__PURE__*/_react["default"].createElement("div", {
+  }) : children)), Array.isArray(children) && /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel-circles"
-  }, Array.isArray(children) && children.map(function (el, i) {
+  }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
       className: "evroca-carousel-circle".concat(i >= currentSlide && i < currentSlide + numSlidesOnScreen ? " active" : ""),
       "aria-hidden": "true",
