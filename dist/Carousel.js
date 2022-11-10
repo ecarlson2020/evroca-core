@@ -128,12 +128,14 @@ function Carousel(_ref) {
     return 25;
   };
 
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    id: "evroca-carousel"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       position: "relative"
     }
   }, (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(true), (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
-    id: "evroca-carousel",
+    id: "evroca-carousel-inner",
     ref: setOuterRef,
     onScroll: onScroll,
     onLoad: onScroll

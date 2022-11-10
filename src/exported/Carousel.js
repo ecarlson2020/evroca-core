@@ -73,12 +73,12 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   };
 
   return (
-    <div>
+    <div id='evroca-carousel'>
       <div style={{ position: "relative" }}>
         {children?.length > 1 && drawChevron(true)}
         {children?.length > 1 && drawChevron(false)}
         <div
-          id="evroca-carousel"
+          id="evroca-carousel-inner"
           ref={setOuterRef}
           onScroll={onScroll}
           onLoad={onScroll}
