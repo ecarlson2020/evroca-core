@@ -12,6 +12,7 @@
 .evroca-carousel-item{
   display:inline-block;
   white-space:normal;
+  vertical-align:top;
 }
 .evroca-chevron{
   position:absolute;
