@@ -73,7 +73,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   };
 
   return (
-    <div id='evroca-carousel'>
+    <div id="evroca-carousel">
       <div style={{ position: "relative" }}>
         {children?.length > 1 && drawChevron(true)}
         {children?.length > 1 && drawChevron(false)}
