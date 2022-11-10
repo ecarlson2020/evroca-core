@@ -23,8 +23,10 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   }, [outerRef]);
 
   const onScroll = () => {
-    setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
-    setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+    if (innerRef) {
+      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
+      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+    }
   };
 
   const chevronOnClick = (isLeft) => {

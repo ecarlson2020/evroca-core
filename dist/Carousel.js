@@ -74,8 +74,10 @@ function Carousel(_ref) {
   }, [outerRef]);
 
   var onScroll = function onScroll() {
-    setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
-    setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+    if (innerRef) {
+      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
+      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+    }
   };
 
   var chevronOnClick = function chevronOnClick(isLeft) {
