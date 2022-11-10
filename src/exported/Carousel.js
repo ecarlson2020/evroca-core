@@ -73,8 +73,8 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   return (
     <div>
       <div style={{ position: "relative" }}>
-        {drawChevron(true)}
-        {drawChevron(false)}
+        {children?.length > 1 && drawChevron(true)}
+        {children?.length > 1 && drawChevron(false)}
         <div
           id="evroca-carousel"
           ref={setOuterRef}
@@ -92,7 +92,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
                   <div className="evroca-carousel-inner">{el}</div>
                 </div>
               ))
-            : "Requires elements to be passed"}
+            : children}
         </div>
       </div>
       <div id="evroca-carousel-circles">

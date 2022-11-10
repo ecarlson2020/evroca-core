@@ -130,7 +130,7 @@ function Carousel(_ref) {
     style: {
       position: "relative"
     }
-  }, drawChevron(true), drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
+  }, (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(true), (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel",
     ref: setOuterRef,
     onScroll: onScroll,
@@ -148,7 +148,7 @@ function Carousel(_ref) {
     }), /*#__PURE__*/_react["default"].createElement("div", {
       className: "evroca-carousel-inner"
     }, el));
-  }) : "Requires elements to be passed")), /*#__PURE__*/_react["default"].createElement("div", {
+  }) : children)), /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel-circles"
   }, Array.isArray(children) && children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
