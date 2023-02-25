@@ -17,10 +17,12 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   };
 
   const changeScreenWidth = () => {
-    setScreenWidth(outerRef.offsetWidth);
-    setNumSlidesOnScreen(
-      Math.round(outerRef.offsetWidth / innerRef.offsetWidth)
-    );
+    if (innerRef && outerRef) {
+      setScreenWidth(outerRef.offsetWidth);
+      setNumSlidesOnScreen(
+        Math.round(outerRef.offsetWidth / innerRef.offsetWidth)
+      );
+    }
   };
 
   useEffect(() => {

@@ -66,8 +66,10 @@ function Carousel(_ref) {
   };
 
   var changeScreenWidth = function changeScreenWidth() {
-    setScreenWidth(outerRef.offsetWidth);
-    setNumSlidesOnScreen(Math.round(outerRef.offsetWidth / innerRef.offsetWidth));
+    if (innerRef && outerRef) {
+      setScreenWidth(outerRef.offsetWidth);
+      setNumSlidesOnScreen(Math.round(outerRef.offsetWidth / innerRef.offsetWidth));
+    }
   };
 
   (0, _react.useEffect)(function () {
