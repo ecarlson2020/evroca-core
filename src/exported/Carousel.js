@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import "./Carousel.css";
+import styles from "./Carousel.module.css";
 
 export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const [innerRef, setInnerRef] = useState(null);
@@ -46,7 +46,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="evroca-chevron"
+        className={styles.evrocaChevron}
         style={{ ...conditionalStyle }}
         onClick={() => chevronOnClick(isLeft)}
       >
@@ -78,7 +78,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
         {children?.length > 1 && drawChevron(true)}
         {children?.length > 1 && drawChevron(false)}
         <div
-          id="evroca-carousel-inner"
+          className={styles.evrocaCarouselInner}
           ref={setOuterRef}
           onScroll={onScroll}
           onLoad={onScroll}
@@ -87,23 +87,23 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
             ? children.map((el, i) => (
                 <div
                   key={i}
-                  className="evroca-carousel-item"
+                  className={styles.evrocaCarouselItem}
                   {...(i === 0 ? { ref: setInnerRef } : {})}
                   style={{ width: `${getCarouselItemWidth()}%` }}
                 >
-                  <div className="evroca-carousel-inner">{el}</div>
+                  <div className={styles.evrocaCarouselInner}>{el}</div>
                 </div>
               ))
             : children}
         </div>
       </div>
       {Array.isArray(children) && (
-        <div id="evroca-carousel-circles">
+        <div className={styles.evrocaCarouselCircles}>
           {children.map((el, i) => (
             <div
-              className={`evroca-carousel-circle${
+              className={`${styles.evrocaCarouselCircle}${
                 i >= currentSlide && i < currentSlide + numSlidesOnScreen
-                  ? " active"
+                  ? ` ${styles.active}`
                   : ""
               }`}
               aria-hidden="true"

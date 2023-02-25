@@ -19,7 +19,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-require("./Carousel.css");
+var _CarouselModule = _interopRequireDefault(require("./Carousel.module.css"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -98,7 +98,7 @@ function Carousel(_ref) {
       strokeWidth: "2",
       strokeLinecap: "round",
       strokeLinejoin: "round",
-      className: "evroca-chevron",
+      className: _CarouselModule["default"].evrocaChevron,
       style: _objectSpread({}, conditionalStyle),
       onClick: function onClick() {
         return chevronOnClick(isLeft);
@@ -135,14 +135,14 @@ function Carousel(_ref) {
       position: "relative"
     }
   }, (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(true), (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
-    id: "evroca-carousel-inner",
+    className: _CarouselModule["default"].evrocaCarouselInner,
     ref: setOuterRef,
     onScroll: onScroll,
     onLoad: onScroll
   }, Array.isArray(children) ? children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", (0, _extends2["default"])({
       key: i,
-      className: "evroca-carousel-item"
+      className: _CarouselModule["default"].evrocaCarouselItem
     }, i === 0 ? {
       ref: setInnerRef
     } : {}, {
@@ -150,13 +150,13 @@ function Carousel(_ref) {
         width: "".concat(getCarouselItemWidth(), "%")
       }
     }), /*#__PURE__*/_react["default"].createElement("div", {
-      className: "evroca-carousel-inner"
+      className: _CarouselModule["default"].evrocaCarouselInner
     }, el));
   }) : children)), Array.isArray(children) && /*#__PURE__*/_react["default"].createElement("div", {
-    id: "evroca-carousel-circles"
+    className: _CarouselModule["default"].evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
-      className: "evroca-carousel-circle".concat(i >= currentSlide && i < currentSlide + numSlidesOnScreen ? " active" : ""),
+      className: "".concat(_CarouselModule["default"].evrocaCarouselCircle).concat(i >= currentSlide && i < currentSlide + numSlidesOnScreen ? " ".concat(_CarouselModule["default"].active) : ""),
       "aria-hidden": "true",
       type: "button",
       key: i,
