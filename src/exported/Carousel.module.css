@@ -26,7 +26,7 @@
   z-index:1;
   transition:0.2s ease background;
 }
-.evrocaChevron::hover{
+.evrocaChevron:hover{
   background:rgba(0,0,0,0.7);
 }
 .evrocaCarouselCircles{
@@ -44,11 +44,12 @@
   height:5px;
   margin-right:8px;
   transition:all 0.3s ease-in-out;
+  cursor:pointer;
 }
 .evrocaCarouselCircle:last-child{
   margin-right:0;
 }
-.active{
+.active, .evrocaCarouselCircle:hover{
   background:#999;
   border:2px solid #999;
   transform:scale(1.3);
