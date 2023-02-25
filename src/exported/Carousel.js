@@ -9,8 +9,18 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [screenWidth, setScreenWidth] = useState(null);
 
+  const onScroll = () => {
+    if (innerRef) {
+      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
+      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+    }
+  };
+
   const changeScreenWidth = () => {
     setScreenWidth(outerRef.offsetWidth);
+    setNumSlidesOnScreen(
+      Math.round(outerRef.offsetWidth / innerRef.offsetWidth)
+    );
   };
 
   useEffect(() => {
@@ -21,13 +31,6 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
 
     return () => window.removeEventListener("resize", changeScreenWidth);
   }, [outerRef]);
-
-  const onScroll = () => {
-    if (innerRef) {
-      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
-      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
-    }
-  };
 
   const chevronOnClick = (isLeft) => {
     outerRef.scrollLeft = isLeft
@@ -72,18 +75,20 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     return 25;
   };
 
+  const showCarouselTogglers = children?.length > numSlidesOnScreen;
+
   return (
     <div id="evroca-carousel">
       <div style={{ position: "relative" }}>
-        {children?.length > 1 && drawChevron(true)}
-        {children?.length > 1 && drawChevron(false)}
+        {showCarouselTogglers && drawChevron(true)}
+        {showCarouselTogglers && drawChevron(false)}
         <div
           className={styles.evrocaCarouselInner}
           ref={setOuterRef}
           onScroll={onScroll}
           onLoad={onScroll}
         >
-          {Array.isArray(children)
+          {children?.length > 1
             ? children.map((el, i) => (
                 <div
                   key={i}
@@ -97,7 +102,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
             : children}
         </div>
       </div>
-      {Array.isArray(children) && (
+      {showCarouselTogglers && (
         <div className={styles.evrocaCarouselCircles}>
           {children.map((el, i) => (
             <div

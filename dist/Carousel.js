@@ -58,8 +58,16 @@ function Carousel(_ref) {
       screenWidth = _useState10[0],
       setScreenWidth = _useState10[1];
 
+  var onScroll = function onScroll() {
+    if (innerRef) {
+      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
+      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+    }
+  };
+
   var changeScreenWidth = function changeScreenWidth() {
     setScreenWidth(outerRef.offsetWidth);
+    setNumSlidesOnScreen(Math.round(outerRef.offsetWidth / innerRef.offsetWidth));
   };
 
   (0, _react.useEffect)(function () {
@@ -72,13 +80,6 @@ function Carousel(_ref) {
       return window.removeEventListener("resize", changeScreenWidth);
     };
   }, [outerRef]);
-
-  var onScroll = function onScroll() {
-    if (innerRef) {
-      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
-      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
-    }
-  };
 
   var chevronOnClick = function chevronOnClick(isLeft) {
     outerRef.scrollLeft = isLeft ? (currentSlide - 1) * innerRef.offsetWidth : (currentSlide + 1) * innerRef.offsetWidth;
@@ -128,18 +129,19 @@ function Carousel(_ref) {
     return 25;
   };
 
+  var showCarouselTogglers = (children === null || children === void 0 ? void 0 : children.length) > numSlidesOnScreen;
   return /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel"
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       position: "relative"
     }
-  }, (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(true), (children === null || children === void 0 ? void 0 : children.length) > 1 && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
+  }, showCarouselTogglers && drawChevron(true), showCarouselTogglers && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
     className: _CarouselModule["default"].evrocaCarouselInner,
     ref: setOuterRef,
     onScroll: onScroll,
     onLoad: onScroll
-  }, Array.isArray(children) ? children.map(function (el, i) {
+  }, (children === null || children === void 0 ? void 0 : children.length) > 1 ? children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", (0, _extends2["default"])({
       key: i,
       className: _CarouselModule["default"].evrocaCarouselItem
@@ -152,7 +154,7 @@ function Carousel(_ref) {
     }), /*#__PURE__*/_react["default"].createElement("div", {
       className: _CarouselModule["default"].evrocaCarouselInner
     }, el));
-  }) : children)), Array.isArray(children) && /*#__PURE__*/_react["default"].createElement("div", {
+  }) : children)), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
     className: _CarouselModule["default"].evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
