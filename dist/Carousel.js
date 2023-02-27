@@ -58,10 +58,16 @@ function Carousel(_ref) {
       screenWidth = _useState10[0],
       setScreenWidth = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(0),
+      _useState12 = (0, _slicedToArray2["default"])(_useState11, 2),
+      slidesHeight = _useState12[0],
+      setSlidesHeight = _useState12[1];
+
   var onScroll = function onScroll() {
     if (innerRef) {
       setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
       setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+      setSlidesHeight(innerRef.scrollHeight);
     }
   };
 
@@ -133,10 +139,17 @@ function Carousel(_ref) {
 
   var showCarouselTogglers = (children === null || children === void 0 ? void 0 : children.length) > numSlidesOnScreen;
   return /*#__PURE__*/_react["default"].createElement("div", {
-    id: "evroca-carousel"
+    id: "evroca-carousel",
+    className: _CarouselModule["default"].evrocaCarousel
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
-      position: "relative"
+      height: slidesHeight,
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      position: "relative",
+      height: "100%"
     }
   }, showCarouselTogglers && drawChevron(true), showCarouselTogglers && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
     className: _CarouselModule["default"].evrocaCarouselInner,
@@ -156,7 +169,7 @@ function Carousel(_ref) {
     }), /*#__PURE__*/_react["default"].createElement("div", {
       className: _CarouselModule["default"].evrocaCarouselInner
     }, el));
-  }) : children)), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
+  }) : children))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
     className: _CarouselModule["default"].evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {

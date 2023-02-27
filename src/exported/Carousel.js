@@ -8,11 +8,13 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [screenWidth, setScreenWidth] = useState(null);
+  const [slidesHeight, setSlidesHeight] = useState(0);
 
   const onScroll = () => {
     if (innerRef) {
       setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
       setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+      setSlidesHeight(innerRef.scrollHeight);
     }
   };
 
@@ -80,28 +82,30 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const showCarouselTogglers = children?.length > numSlidesOnScreen;
 
   return (
-    <div id="evroca-carousel">
-      <div style={{ position: "relative" }}>
-        {showCarouselTogglers && drawChevron(true)}
-        {showCarouselTogglers && drawChevron(false)}
-        <div
-          className={styles.evrocaCarouselInner}
-          ref={setOuterRef}
-          onScroll={onScroll}
-          onLoad={onScroll}
-        >
-          {children?.length > 1
-            ? children.map((el, i) => (
-                <div
-                  key={i}
-                  className={styles.evrocaCarouselItem}
-                  {...(i === 0 ? { ref: setInnerRef } : {})}
-                  style={{ width: `${getCarouselItemWidth()}%` }}
-                >
-                  <div className={styles.evrocaCarouselInner}>{el}</div>
-                </div>
-              ))
-            : children}
+    <div id="evroca-carousel" className={styles.evrocaCarousel}>
+      <div style={{ height: slidesHeight, overflow: "hidden" }}>
+        <div style={{ position: "relative", height: "100%" }}>
+          {showCarouselTogglers && drawChevron(true)}
+          {showCarouselTogglers && drawChevron(false)}
+          <div
+            className={styles.evrocaCarouselInner}
+            ref={setOuterRef}
+            onScroll={onScroll}
+            onLoad={onScroll}
+          >
+            {children?.length > 1
+              ? children.map((el, i) => (
+                  <div
+                    key={i}
+                    className={styles.evrocaCarouselItem}
+                    {...(i === 0 ? { ref: setInnerRef } : {})}
+                    style={{ width: `${getCarouselItemWidth()}%` }}
+                  >
+                    <div className={styles.evrocaCarouselInner}>{el}</div>
+                  </div>
+                ))
+              : children}
+          </div>
         </div>
       </div>
       {showCarouselTogglers && (

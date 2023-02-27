@@ -1,8 +1,3 @@
-.evrocaCarouselInner::-webkit-scrollbar{
-  width:0;
-  height:0;
-  background:transparent;
-}
 .evrocaCarouselInner{
   white-space:nowrap;
   overflow-x:auto;
