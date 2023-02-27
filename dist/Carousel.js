@@ -19,8 +19,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _CarouselModule = _interopRequireDefault(require("./Carousel.module.css"));
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -28,6 +26,66 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var styles = {
+  evrocaCarouselInner: {
+    whiteSpace: "nowrap",
+    overflowX: "auto",
+    overflowY: "hidden",
+    scrollBehavior: "smooth"
+  },
+  evrocaCarouselItem: {
+    display: "inline-block",
+    whiteSpace: "normal",
+    verticalAlign: "top"
+  },
+  evrocaChevron: {
+    position: "absolute",
+    top: "calc(50% - 35px / 2)",
+    width: "30px",
+    height: "30px",
+    textAlign: "center",
+    borderRadius: "100%",
+    background: "rgba(0,0,0,0.3)",
+    color: "#fff",
+    zIndex: "1",
+    transition: "0.2s ease background",
+    cursor: "pointer"
+  },
+  evrocaCarouselCircles: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "16px"
+  },
+  evrocaCarouselCircle: {
+    boxSizing: "content-box",
+    border: "2px solid #bbb",
+    background: "#fff",
+    borderRadius: "100%",
+    width: "5px",
+    height: "5px",
+    marginRight: "8px",
+    transition: "all 0.3s ease-in-out",
+    cursor: "pointer"
+  },
+  active: {
+    background: "#999",
+    border: "2px solid #999",
+    transform: "scale(1.3)"
+  } //  evrocaCarouselCircle:last-child: {
+  //    marginRight:0,
+  //  },
+  //  evrocaChevron:hover: {
+  //    background:"rgba(0,0,0,0.7)",
+  //  },
+  //  active, .evrocaCarouselCircle:hover: {
+  //    background:"#999",
+  //    border:"2px solid #999",
+  //    transform:"scale(1.3)",
+  //  },
+
+};
 
 function Carousel(_ref) {
   var children = _ref.children,
@@ -63,6 +121,16 @@ function Carousel(_ref) {
       slidesHeight = _useState12[0],
       setSlidesHeight = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = (0, _slicedToArray2["default"])(_useState13, 2),
+      chevronLeftHovered = _useState14[0],
+      setChevronLeftHovered = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = (0, _slicedToArray2["default"])(_useState15, 2),
+      chevronRightHovered = _useState16[0],
+      setChevronRightHovered = _useState16[1];
+
   var onScroll = function onScroll() {
     if (innerRef) {
       setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
@@ -74,6 +142,7 @@ function Carousel(_ref) {
   var changeScreenWidth = function changeScreenWidth() {
     if (innerRef && outerRef) {
       setScreenWidth(outerRef.offsetWidth);
+      setSlidesHeight(innerRef.scrollHeight);
       setNumSlidesOnScreen(Math.round(outerRef.offsetWidth / innerRef.offsetWidth));
     }
   };
@@ -107,10 +176,21 @@ function Carousel(_ref) {
       strokeWidth: "2",
       strokeLinecap: "round",
       strokeLinejoin: "round",
-      className: _CarouselModule["default"].evrocaChevron,
-      style: _objectSpread({}, conditionalStyle),
+      style: _objectSpread(_objectSpread(_objectSpread({}, conditionalStyle), styles.evrocaChevron), (isLeft && chevronLeftHovered || !isLeft && chevronRightHovered) && {
+        background: "rgb(0 0 0 / 70%)"
+      }),
       onClick: function onClick() {
         return chevronOnClick(isLeft);
+      },
+      onMouseEnter: isLeft ? function () {
+        return setChevronLeftHovered(true);
+      } : function () {
+        return setChevronRightHovered(true);
+      },
+      onMouseLeave: isLeft ? function () {
+        return setChevronLeftHovered(false);
+      } : function () {
+        return setChevronRightHovered(false);
       }
     }, /*#__PURE__*/_react["default"].createElement("polyline", {
       points: isLeft ? "15 18 9 12 15 6" : "9 18 15 12 9 6"
@@ -140,7 +220,7 @@ function Carousel(_ref) {
   var showCarouselTogglers = (children === null || children === void 0 ? void 0 : children.length) > numSlidesOnScreen;
   return /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel",
-    className: _CarouselModule["default"].evrocaCarousel
+    style: styles.evrocaCarousel
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       height: slidesHeight,
@@ -148,32 +228,32 @@ function Carousel(_ref) {
     }
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
-      position: "relative",
-      height: "100%"
+      position: "relative"
     }
   }, showCarouselTogglers && drawChevron(true), showCarouselTogglers && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
-    className: _CarouselModule["default"].evrocaCarouselInner,
+    style: styles.evrocaCarouselInner,
     ref: setOuterRef,
     onScroll: onScroll,
     onLoad: onScroll
   }, (children === null || children === void 0 ? void 0 : children.length) > 1 ? children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", (0, _extends2["default"])({
-      key: i,
-      className: _CarouselModule["default"].evrocaCarouselItem
+      key: i
     }, i === 0 ? {
       ref: setInnerRef
     } : {}, {
-      style: {
+      style: _objectSpread(_objectSpread({}, styles.evrocaCarouselItem), {}, {
         width: "".concat(getCarouselItemWidth(), "%")
-      }
+      })
     }), /*#__PURE__*/_react["default"].createElement("div", {
-      className: _CarouselModule["default"].evrocaCarouselInner
+      style: styles.evrocaCarouselInner
     }, el));
   }) : children))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
-    className: _CarouselModule["default"].evrocaCarouselCircles
+    style: styles.evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
-      className: "".concat(_CarouselModule["default"].evrocaCarouselCircle).concat(i >= currentSlide && i < currentSlide + numSlidesOnScreen ? " ".concat(_CarouselModule["default"].active) : ""),
+      style: _objectSpread(_objectSpread(_objectSpread({}, styles.evrocaCarouselCircle), i + 1 === children.length && {
+        marginRight: 0
+      }), i >= currentSlide && i < currentSlide + numSlidesOnScreen && styles.active),
       "aria-hidden": "true",
       type: "button",
       key: i,
