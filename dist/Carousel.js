@@ -19,6 +19,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _Carousel = _interopRequireDefault(require("./Carousel.style"));
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -26,66 +28,6 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-var styles = {
-  evrocaCarouselInner: {
-    whiteSpace: "nowrap",
-    overflowX: "auto",
-    overflowY: "hidden",
-    scrollBehavior: "smooth"
-  },
-  evrocaCarouselItem: {
-    display: "inline-block",
-    whiteSpace: "normal",
-    verticalAlign: "top"
-  },
-  evrocaChevron: {
-    position: "absolute",
-    top: "calc(50% - 35px / 2)",
-    width: "30px",
-    height: "30px",
-    textAlign: "center",
-    borderRadius: "100%",
-    background: "rgba(0,0,0,0.3)",
-    color: "#fff",
-    zIndex: "1",
-    transition: "0.2s ease background",
-    cursor: "pointer"
-  },
-  evrocaCarouselCircles: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "16px"
-  },
-  evrocaCarouselCircle: {
-    boxSizing: "content-box",
-    border: "2px solid #bbb",
-    background: "#fff",
-    borderRadius: "100%",
-    width: "5px",
-    height: "5px",
-    marginRight: "8px",
-    transition: "all 0.3s ease-in-out",
-    cursor: "pointer"
-  },
-  active: {
-    background: "#999",
-    border: "2px solid #999",
-    transform: "scale(1.3)"
-  } //  evrocaCarouselCircle:last-child: {
-  //    marginRight:0,
-  //  },
-  //  evrocaChevron:hover: {
-  //    background:"rgba(0,0,0,0.7)",
-  //  },
-  //  active, .evrocaCarouselCircle:hover: {
-  //    background:"#999",
-  //    border:"2px solid #999",
-  //    transform:"scale(1.3)",
-  //  },
-
-};
 
 function Carousel(_ref) {
   var children = _ref.children,
@@ -176,7 +118,7 @@ function Carousel(_ref) {
       strokeWidth: "2",
       strokeLinecap: "round",
       strokeLinejoin: "round",
-      style: _objectSpread(_objectSpread(_objectSpread({}, conditionalStyle), styles.evrocaChevron), (isLeft && chevronLeftHovered || !isLeft && chevronRightHovered) && {
+      style: _objectSpread(_objectSpread(_objectSpread({}, conditionalStyle), _Carousel["default"].evrocaChevron), (isLeft && chevronLeftHovered || !isLeft && chevronRightHovered) && {
         background: "rgb(0 0 0 / 70%)"
       }),
       onClick: function onClick() {
@@ -220,7 +162,7 @@ function Carousel(_ref) {
   var showCarouselTogglers = (children === null || children === void 0 ? void 0 : children.length) > numSlidesOnScreen;
   return /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel",
-    style: styles.evrocaCarousel
+    style: _Carousel["default"].evrocaCarousel
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       height: slidesHeight,
@@ -231,7 +173,7 @@ function Carousel(_ref) {
       position: "relative"
     }
   }, showCarouselTogglers && drawChevron(true), showCarouselTogglers && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
-    style: styles.evrocaCarouselInner,
+    style: _Carousel["default"].evrocaCarouselInner,
     ref: setOuterRef,
     onScroll: onScroll,
     onLoad: onScroll
@@ -241,19 +183,19 @@ function Carousel(_ref) {
     }, i === 0 ? {
       ref: setInnerRef
     } : {}, {
-      style: _objectSpread(_objectSpread({}, styles.evrocaCarouselItem), {}, {
+      style: _objectSpread(_objectSpread({}, _Carousel["default"].evrocaCarouselItem), {}, {
         width: "".concat(getCarouselItemWidth(), "%")
       })
     }), /*#__PURE__*/_react["default"].createElement("div", {
-      style: styles.evrocaCarouselInner
+      style: _Carousel["default"].evrocaCarouselInner
     }, el));
   }) : children))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
-    style: styles.evrocaCarouselCircles
+    style: _Carousel["default"].evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {
-      style: _objectSpread(_objectSpread(_objectSpread({}, styles.evrocaCarouselCircle), i + 1 === children.length && {
+      style: _objectSpread(_objectSpread(_objectSpread({}, _Carousel["default"].evrocaCarouselCircle), i + 1 === children.length && {
         marginRight: 0
-      }), i >= currentSlide && i < currentSlide + numSlidesOnScreen && styles.active),
+      }), i >= currentSlide && i < currentSlide + numSlidesOnScreen && _Carousel["default"].active),
       "aria-hidden": "true",
       type: "button",
       key: i,
