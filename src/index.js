@@ -1,7 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import Carousel from "./exported";
 import "./style.css";
+
+const container = document.querySelector("#root");
+const root = createRoot(container);
 
 function App() {
   return (
@@ -17,4 +20,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+root.render(<App />);
