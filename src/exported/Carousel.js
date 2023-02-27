@@ -30,15 +30,6 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     }
   };
 
-  useEffect(() => {
-    if (!screenWidth && outerRef) {
-      changeScreenWidth();
-      window.addEventListener("resize", changeScreenWidth);
-    }
-
-    return () => window.removeEventListener("resize", changeScreenWidth);
-  }, [outerRef]);
-
   const chevronOnClick = (isLeft) => {
     outerRef.scrollLeft = isLeft
       ? (currentSlide - 1) * innerRef.offsetWidth
@@ -99,6 +90,19 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   };
 
   const showCarouselTogglers = children?.length > numSlidesOnScreen;
+
+  useEffect(() => {
+    if (!screenWidth && outerRef) {
+      changeScreenWidth();
+      window.addEventListener("resize", changeScreenWidth);
+    }
+
+    return () => window.removeEventListener("resize", changeScreenWidth);
+  }, [outerRef]);
+
+  useEffect(() => {
+    onScroll();
+  }, [screenWidth]);
 
   return (
     <div id="evroca-carousel" style={styles.evrocaCarousel}>

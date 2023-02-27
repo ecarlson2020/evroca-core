@@ -65,15 +65,6 @@ function Carousel(_ref) {
       setNumSlidesOnScreen(Math.round(outerRef.offsetWidth / innerRef.offsetWidth));
     }
   };
-  (0, _react.useEffect)(function () {
-    if (!screenWidth && outerRef) {
-      changeScreenWidth();
-      window.addEventListener("resize", changeScreenWidth);
-    }
-    return function () {
-      return window.removeEventListener("resize", changeScreenWidth);
-    };
-  }, [outerRef]);
   var chevronOnClick = function chevronOnClick(isLeft) {
     outerRef.scrollLeft = isLeft ? (currentSlide - 1) * innerRef.offsetWidth : (currentSlide + 1) * innerRef.offsetWidth;
   };
@@ -127,6 +118,18 @@ function Carousel(_ref) {
     return 25;
   };
   var showCarouselTogglers = (children === null || children === void 0 ? void 0 : children.length) > numSlidesOnScreen;
+  (0, _react.useEffect)(function () {
+    if (!screenWidth && outerRef) {
+      changeScreenWidth();
+      window.addEventListener("resize", changeScreenWidth);
+    }
+    return function () {
+      return window.removeEventListener("resize", changeScreenWidth);
+    };
+  }, [outerRef]);
+  (0, _react.useEffect)(function () {
+    onScroll();
+  }, [screenWidth]);
   return /*#__PURE__*/_react["default"].createElement("div", {
     id: "evroca-carousel",
     style: _Carousel["default"].evrocaCarousel
