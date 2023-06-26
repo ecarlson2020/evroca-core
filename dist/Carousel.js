@@ -159,7 +159,9 @@ function Carousel(_ref) {
     }), /*#__PURE__*/_react["default"].createElement("div", {
       style: _Carousel["default"].evrocaCarouselInner
     }, el));
-  }) : children))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
+  }) : /*#__PURE__*/_react["default"].createElement("div", {
+    ref: setInnerRef
+  }, children)))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
     style: _Carousel["default"].evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {

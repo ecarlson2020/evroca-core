@@ -116,20 +116,22 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
             onScroll={onScroll}
             onLoad={onScroll}
           >
-            {children?.length > 1
-              ? children.map((el, i) => (
-                  <div
-                    key={i}
-                    {...(i === 0 ? { ref: setInnerRef } : {})}
-                    style={{
-                      ...styles.evrocaCarouselItem,
-                      width: `${getCarouselItemWidth()}%`,
-                    }}
-                  >
-                    <div style={styles.evrocaCarouselInner}>{el}</div>
-                  </div>
-                ))
-              : children}
+            {children?.length > 1 ? (
+              children.map((el, i) => (
+                <div
+                  key={i}
+                  {...(i === 0 ? { ref: setInnerRef } : {})}
+                  style={{
+                    ...styles.evrocaCarouselItem,
+                    width: `${getCarouselItemWidth()}%`,
+                  }}
+                >
+                  <div style={styles.evrocaCarouselInner}>{el}</div>
+                </div>
+              ))
+            ) : (
+              <div ref={setInnerRef}>{children}</div>
+            )}
           </div>
         </div>
       </div>
