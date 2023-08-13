@@ -110,7 +110,20 @@ function Carousel(_ref) {
     if (screenWidth < 900) {
       return 50;
     }
-    return 25;
+    return 33.333333333;
+  };
+  var getSlideTransform = function getSlideTransform(i) {
+    var scale = 0.9;
+    var rotate = 20;
+    if (numSlidesOnScreen === 3) {
+      if (i === currentSlide) {
+        return "scale(".concat(scale, ") rotateY(").concat(-rotate, "deg)");
+      }
+      if (i === currentSlide + 2) {
+        return "scale(".concat(scale, ") rotateY(").concat(rotate, "deg)");
+      }
+    }
+    return "inherit";
   };
   var showCarouselTogglers = (children === null || children === void 0 ? void 0 : children.length) > numSlidesOnScreen;
   (0, _react.useEffect)(function () {
@@ -147,8 +160,13 @@ function Carousel(_ref) {
       ref: setInnerRef
     } : {}, {
       style: _objectSpread(_objectSpread({}, _Carousel["default"].evrocaCarouselItem), {}, {
-        width: "".concat(getCarouselItemWidth(), "%")
-      })
+        width: "".concat(getCarouselItemWidth(), "%"),
+        transform: getSlideTransform(i)
+      }),
+      onClick: function onClick() {
+        return circleOnClick(i - 1);
+      },
+      "aria-hidden": "true"
     }), el);
   }) : /*#__PURE__*/_react["default"].createElement("div", {
     ref: setInnerRef

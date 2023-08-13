@@ -13,12 +13,14 @@ var styles = {
     overflowX: "auto",
     overflowY: "hidden",
     scrollBehavior: "smooth",
-    marginBottom: "-15px"
+    marginBottom: "-15px",
+    perspective: "500px"
   },
   evrocaCarouselItem: {
     display: "inline-block",
     whiteSpace: "normal",
-    verticalAlign: "top"
+    verticalAlign: "top",
+    transition: "0.3s ease transform"
   },
   evrocaChevron: {
     position: "absolute",

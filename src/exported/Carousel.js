@@ -85,7 +85,21 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     if (screenWidth < 900) {
       return 50;
     }
-    return 25;
+    return 33.333333333;
+  };
+
+  const getSlideTransform = (i) => {
+    const scale = 0.9;
+    const rotate = 20;
+    if (numSlidesOnScreen === 3) {
+      if (i === currentSlide) {
+        return `scale(${scale}) rotateY(${-rotate}deg)`;
+      }
+      if (i === currentSlide + 2) {
+        return `scale(${scale}) rotateY(${rotate}deg)`;
+      }
+    }
+    return "inherit";
   };
 
   const showCarouselTogglers = children?.length > numSlidesOnScreen;
@@ -128,7 +142,10 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
                   style={{
                     ...styles.evrocaCarouselItem,
                     width: `${getCarouselItemWidth()}%`,
+                    transform: getSlideTransform(i),
                   }}
+                  onClick={() => circleOnClick(i - 1)}
+                  aria-hidden="true"
                 >
                   {el}
                 </div>

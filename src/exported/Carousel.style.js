@@ -8,11 +8,13 @@ const styles = {
     overflowY: "hidden",
     scrollBehavior: "smooth",
     marginBottom: "-15px",
+    perspective: "500px",
   },
   evrocaCarouselItem: {
     display: "inline-block",
     whiteSpace: "normal",
     verticalAlign: "top",
+    transition: "0.3s ease transform",
   },
   evrocaChevron: {
     position: "absolute",
