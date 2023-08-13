@@ -78,6 +78,14 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     outerRef.scrollLeft = innerRef.getBoundingClientRect().width * index;
   };
 
+  const itemOnClick = (index) => {
+    if (index > currentSlide) {
+      circleOnClick(currentSlide + 1);
+    } else {
+      circleOnClick(currentSlide - 1);
+    }
+  };
+
   const getCarouselItemWidth = () => {
     if (numberOfSlidesOnScreen !== 4) {
       return (1 / numberOfSlidesOnScreen) * 100;
@@ -147,7 +155,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
                     width: `${getCarouselItemWidth()}%`,
                     transform: getSlideTransform(i),
                   }}
-                  onClick={() => circleOnClick(i - 1)}
+                  onClick={() => itemOnClick(i)}
                   aria-hidden="true"
                 >
                   {el}

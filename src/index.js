@@ -10,7 +10,7 @@ function App() {
   return (
     <div style={{ width: "50%" }}>
       <Carousel>
-        {Array(50)
+        {Array(10)
           .fill(Math.random())
           .map((el) => (
             <div key={el} style={{ border: "10px solid red" }}>

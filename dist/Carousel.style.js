@@ -20,7 +20,8 @@ var styles = {
     display: "inline-block",
     whiteSpace: "normal",
     verticalAlign: "top",
-    transition: "0.3s ease transform"
+    transition: "0.3s ease transform",
+    cursor: "pointer"
   },
   evrocaChevron: {
     position: "absolute",

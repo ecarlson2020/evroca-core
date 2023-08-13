@@ -15,6 +15,7 @@ const styles = {
     whiteSpace: "normal",
     verticalAlign: "top",
     transition: "0.3s ease transform",
+    cursor: "pointer",
   },
   evrocaChevron: {
     position: "absolute",

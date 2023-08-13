@@ -103,6 +103,13 @@ function Carousel(_ref) {
   var circleOnClick = function circleOnClick(index) {
     outerRef.scrollLeft = innerRef.getBoundingClientRect().width * index;
   };
+  var itemOnClick = function itemOnClick(index) {
+    if (index > currentSlide) {
+      circleOnClick(currentSlide + 1);
+    } else {
+      circleOnClick(currentSlide - 1);
+    }
+  };
   var getCarouselItemWidth = function getCarouselItemWidth() {
     if (numberOfSlidesOnScreen !== 4) {
       return 1 / numberOfSlidesOnScreen * 100;
@@ -167,7 +174,7 @@ function Carousel(_ref) {
         transform: getSlideTransform(i)
       }),
       onClick: function onClick() {
-        return circleOnClick(i - 1);
+        return itemOnClick(i);
       },
       "aria-hidden": "true"
     }), el);
