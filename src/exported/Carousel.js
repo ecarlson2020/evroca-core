@@ -22,7 +22,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     if (innerRef && outerRef) {
       setScreenWidth(outerRef.offsetWidth);
       setNumSlidesOnScreen(
-        Math.round(outerRef.offsetWidth / innerRef.offsetWidth)
+        Math.round(outerRef.offsetWidth / innerRef.offsetWidth),
       );
     }
   };
