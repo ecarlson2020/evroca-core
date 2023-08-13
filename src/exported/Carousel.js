@@ -85,13 +85,13 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     if (screenWidth < 900) {
       return 50;
     }
-    return 33.333333333;
+    return 25;
   };
 
   const getSlideTransform = (i) => {
-    const scale = 0.9;
-    const rotate = 20;
-    if (numSlidesOnScreen === 3) {
+    const scale = 0.95;
+    const rotate = 5;
+    if (numSlidesOnScreen === 4) {
       if (i === currentSlide) {
         return `scale(${scale}) rotateY(${-rotate}deg)`;
       }

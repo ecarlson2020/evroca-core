@@ -110,12 +110,12 @@ function Carousel(_ref) {
     if (screenWidth < 900) {
       return 50;
     }
-    return 33.333333333;
+    return 25;
   };
   var getSlideTransform = function getSlideTransform(i) {
-    var scale = 0.9;
-    var rotate = 20;
-    if (numSlidesOnScreen === 3) {
+    var scale = 0.95;
+    var rotate = 5;
+    if (numSlidesOnScreen === 4) {
       if (i === currentSlide) {
         return "scale(".concat(scale, ") rotateY(").concat(-rotate, "deg)");
       }
