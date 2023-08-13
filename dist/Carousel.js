@@ -39,29 +39,23 @@ function Carousel(_ref) {
     _useState10 = (0, _slicedToArray2["default"])(_useState9, 2),
     screenWidth = _useState10[0],
     setScreenWidth = _useState10[1];
-  var _useState11 = (0, _react.useState)(0),
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = (0, _slicedToArray2["default"])(_useState11, 2),
-    slidesHeight = _useState12[0],
-    setSlidesHeight = _useState12[1];
+    chevronLeftHovered = _useState12[0],
+    setChevronLeftHovered = _useState12[1];
   var _useState13 = (0, _react.useState)(false),
     _useState14 = (0, _slicedToArray2["default"])(_useState13, 2),
-    chevronLeftHovered = _useState14[0],
-    setChevronLeftHovered = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
-    _useState16 = (0, _slicedToArray2["default"])(_useState15, 2),
-    chevronRightHovered = _useState16[0],
-    setChevronRightHovered = _useState16[1];
+    chevronRightHovered = _useState14[0],
+    setChevronRightHovered = _useState14[1];
   var onScroll = function onScroll() {
     if (innerRef) {
       setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
       setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
-      setSlidesHeight(innerRef.scrollHeight);
     }
   };
   var changeScreenWidth = function changeScreenWidth() {
     if (innerRef && outerRef) {
       setScreenWidth(outerRef.offsetWidth);
-      setSlidesHeight(innerRef.scrollHeight);
       setNumSlidesOnScreen(Math.round(outerRef.offsetWidth / innerRef.offsetWidth));
     }
   };
@@ -135,11 +129,6 @@ function Carousel(_ref) {
     id: "evroca-carousel"
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
-      height: slidesHeight,
-      overflow: "hidden"
-    }
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: {
       position: "relative"
     }
   }, showCarouselTogglers && drawChevron(true), showCarouselTogglers && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
@@ -163,7 +152,7 @@ function Carousel(_ref) {
     }), el);
   }) : /*#__PURE__*/_react["default"].createElement("div", {
     ref: setInnerRef
-  }, children))))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
+  }, children)))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
     style: _Carousel["default"].evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {

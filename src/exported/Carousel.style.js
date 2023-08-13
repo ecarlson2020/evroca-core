@@ -1,9 +1,13 @@
 const styles = {
+  evrocaCarouselOuter: {
+    overflow: "hidden",
+  },
   evrocaCarouselInner: {
     whiteSpace: "nowrap",
     overflowX: "auto",
     overflowY: "hidden",
     scrollBehavior: "smooth",
+    marginBottom: "-15px",
   },
   evrocaCarouselItem: {
     display: "inline-block",

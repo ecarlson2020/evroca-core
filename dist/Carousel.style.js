@@ -5,11 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var styles = {
+  evrocaCarouselOuter: {
+    overflow: "hidden"
+  },
   evrocaCarouselInner: {
     whiteSpace: "nowrap",
     overflowX: "auto",
     overflowY: "hidden",
-    scrollBehavior: "smooth"
+    scrollBehavior: "smooth",
+    marginBottom: "-15px"
   },
   evrocaCarouselItem: {
     display: "inline-block",

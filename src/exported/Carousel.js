@@ -8,7 +8,6 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [screenWidth, setScreenWidth] = useState(null);
-  const [slidesHeight, setSlidesHeight] = useState(0);
   const [chevronLeftHovered, setChevronLeftHovered] = useState(false);
   const [chevronRightHovered, setChevronRightHovered] = useState(false);
 
@@ -16,14 +15,12 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     if (innerRef) {
       setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
       setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
-      setSlidesHeight(innerRef.scrollHeight);
     }
   };
 
   const changeScreenWidth = () => {
     if (innerRef && outerRef) {
       setScreenWidth(outerRef.offsetWidth);
-      setSlidesHeight(innerRef.scrollHeight);
       setNumSlidesOnScreen(
         Math.round(outerRef.offsetWidth / innerRef.offsetWidth)
       );
@@ -108,39 +105,37 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
 
   return (
     <div id="evroca-carousel">
-      <div style={{ height: slidesHeight, overflow: "hidden" }}>
-        <div style={{ position: "relative" }}>
-          {showCarouselTogglers && drawChevron(true)}
-          {showCarouselTogglers && drawChevron(false)}
+      <div style={{ position: "relative" }}>
+        {showCarouselTogglers && drawChevron(true)}
+        {showCarouselTogglers && drawChevron(false)}
+        <div
+          style={{
+            ...styles.evrocaCarouselOuter,
+            padding: showCarouselTogglers ? "0 40px" : "",
+          }}
+        >
           <div
-            style={{
-              ...styles.evrocaCarouselOuter,
-              padding: showCarouselTogglers ? "0 40px" : "",
-            }}
+            style={styles.evrocaCarouselInner}
+            ref={setOuterRef}
+            onScroll={onScroll}
+            onLoad={onScroll}
           >
-            <div
-              style={styles.evrocaCarouselInner}
-              ref={setOuterRef}
-              onScroll={onScroll}
-              onLoad={onScroll}
-            >
-              {children?.length > 1 ? (
-                children.map((el, i) => (
-                  <div
-                    key={i}
-                    {...(i === 0 ? { ref: setInnerRef } : {})}
-                    style={{
-                      ...styles.evrocaCarouselItem,
-                      width: `${getCarouselItemWidth()}%`,
-                    }}
-                  >
-                    {el}
-                  </div>
-                ))
-              ) : (
-                <div ref={setInnerRef}>{children}</div>
-              )}
-            </div>
+            {children?.length > 1 ? (
+              children.map((el, i) => (
+                <div
+                  key={i}
+                  {...(i === 0 ? { ref: setInnerRef } : {})}
+                  style={{
+                    ...styles.evrocaCarouselItem,
+                    width: `${getCarouselItemWidth()}%`,
+                  }}
+                >
+                  {el}
+                </div>
+              ))
+            ) : (
+              <div ref={setInnerRef}>{children}</div>
+            )}
           </div>
         </div>
       </div>
