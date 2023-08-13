@@ -9,6 +9,7 @@
     "start": "yarn && npx webpack-dev-server --mode development --devtool source-map",
     "compile": "yarn && npx webpack --mode production",
     "lint": "npx eslint --fix ./src",
+    "npm:init": "npm adduser",
     "npm:compile": "yarn;rm -rf dist && mkdir dist && babel src/exported -d dist --copy-files",
     "npm:publish": "npm run npm:compile; git add .; gitcommit compile; git push; npm version patch; git push; npm publish"
   },
