@@ -23,10 +23,8 @@ var styles = {
     height: "30px",
     textAlign: "center",
     borderRadius: "100%",
-    background: "rgba(0,0,0,0.3)",
-    color: "#fff",
-    zIndex: "1",
-    transition: "0.2s ease background",
+    transition: "0.2s ease color",
+    color: "#bbb",
     cursor: "pointer"
   },
   evrocaCarouselCircles: {

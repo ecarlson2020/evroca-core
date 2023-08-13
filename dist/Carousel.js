@@ -70,20 +70,21 @@ function Carousel(_ref) {
   };
   var drawChevron = function drawChevron(isLeft) {
     var conditionalStyle = isLeft ? {
-      left: "15px"
+      left: "5px"
     } : {
-      right: "15px"
+      right: "5px",
+      transform: "rotate(180deg)"
     };
     return /*#__PURE__*/_react["default"].createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 24 24",
-      fill: "none",
+      viewBox: "0 0 50 50",
+      fill: "currentColor",
       stroke: "currentColor",
-      strokeWidth: "2",
+      strokeWidth: "1",
       strokeLinecap: "round",
       strokeLinejoin: "round",
       style: _objectSpread(_objectSpread(_objectSpread({}, conditionalStyle), _Carousel["default"].evrocaChevron), (isLeft && chevronLeftHovered || !isLeft && chevronRightHovered) && {
-        background: "rgb(0 0 0 / 70%)"
+        color: "#333"
       }),
       onClick: function onClick() {
         return chevronOnClick(isLeft);
@@ -98,8 +99,8 @@ function Carousel(_ref) {
       } : function () {
         return setChevronRightHovered(false);
       }
-    }, /*#__PURE__*/_react["default"].createElement("polyline", {
-      points: isLeft ? "15 18 9 12 15 6" : "9 18 15 12 9 6"
+    }, /*#__PURE__*/_react["default"].createElement("path", {
+      d: "M34.98 3.99a1 1 0 00-.687.303l-20 20a1 1 0 000 1.414l20 20a1 1 0 101.414-1.414L16.414 25 35.707 5.707a1 1 0 00-.727-1.717z"
     }));
   };
   var circleOnClick = function circleOnClick(index) {
@@ -131,8 +132,7 @@ function Carousel(_ref) {
     onScroll();
   }, [screenWidth]);
   return /*#__PURE__*/_react["default"].createElement("div", {
-    id: "evroca-carousel",
-    style: _Carousel["default"].evrocaCarousel
+    id: "evroca-carousel"
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       height: slidesHeight,
@@ -143,6 +143,10 @@ function Carousel(_ref) {
       position: "relative"
     }
   }, showCarouselTogglers && drawChevron(true), showCarouselTogglers && drawChevron(false), /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, _Carousel["default"].evrocaCarouselOuter), {}, {
+      padding: showCarouselTogglers ? "0 40px" : ""
+    })
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     style: _Carousel["default"].evrocaCarouselInner,
     ref: setOuterRef,
     onScroll: onScroll,
@@ -156,12 +160,10 @@ function Carousel(_ref) {
       style: _objectSpread(_objectSpread({}, _Carousel["default"].evrocaCarouselItem), {}, {
         width: "".concat(getCarouselItemWidth(), "%")
       })
-    }), /*#__PURE__*/_react["default"].createElement("div", {
-      style: _Carousel["default"].evrocaCarouselInner
-    }, el));
+    }), el);
   }) : /*#__PURE__*/_react["default"].createElement("div", {
     ref: setInnerRef
-  }, children)))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
+  }, children))))), showCarouselTogglers && /*#__PURE__*/_react["default"].createElement("div", {
     style: _Carousel["default"].evrocaCarouselCircles
   }, children.map(function (el, i) {
     return /*#__PURE__*/_react["default"].createElement("div", {

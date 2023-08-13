@@ -37,14 +37,16 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   };
 
   const drawChevron = (isLeft) => {
-    const conditionalStyle = isLeft ? { left: "15px" } : { right: "15px" };
+    const conditionalStyle = isLeft
+      ? { left: "5px" }
+      : { right: "5px", transform: "rotate(180deg)" };
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
+        viewBox="0 0 50 50"
+        fill="currentColor"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1"
         strokeLinecap="round"
         strokeLinejoin="round"
         style={{
@@ -52,7 +54,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
           ...styles.evrocaChevron,
           ...(((isLeft && chevronLeftHovered) ||
             (!isLeft && chevronRightHovered)) && {
-            background: "rgb(0 0 0 / 70%)",
+            color: "#333",
           }),
         }}
         onClick={() => chevronOnClick(isLeft)}
@@ -67,7 +69,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
             : () => setChevronRightHovered(false)
         }
       >
-        <polyline points={isLeft ? "15 18 9 12 15 6" : "9 18 15 12 9 6"} />
+        <path d="M34.98 3.99a1 1 0 00-.687.303l-20 20a1 1 0 000 1.414l20 20a1 1 0 101.414-1.414L16.414 25 35.707 5.707a1 1 0 00-.727-1.717z" />
       </svg>
     );
   };
@@ -105,33 +107,40 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   }, [screenWidth]);
 
   return (
-    <div id="evroca-carousel" style={styles.evrocaCarousel}>
+    <div id="evroca-carousel">
       <div style={{ height: slidesHeight, overflow: "hidden" }}>
         <div style={{ position: "relative" }}>
           {showCarouselTogglers && drawChevron(true)}
           {showCarouselTogglers && drawChevron(false)}
           <div
-            style={styles.evrocaCarouselInner}
-            ref={setOuterRef}
-            onScroll={onScroll}
-            onLoad={onScroll}
+            style={{
+              ...styles.evrocaCarouselOuter,
+              padding: showCarouselTogglers ? "0 40px" : "",
+            }}
           >
-            {children?.length > 1 ? (
-              children.map((el, i) => (
-                <div
-                  key={i}
-                  {...(i === 0 ? { ref: setInnerRef } : {})}
-                  style={{
-                    ...styles.evrocaCarouselItem,
-                    width: `${getCarouselItemWidth()}%`,
-                  }}
-                >
-                  <div style={styles.evrocaCarouselInner}>{el}</div>
-                </div>
-              ))
-            ) : (
-              <div ref={setInnerRef}>{children}</div>
-            )}
+            <div
+              style={styles.evrocaCarouselInner}
+              ref={setOuterRef}
+              onScroll={onScroll}
+              onLoad={onScroll}
+            >
+              {children?.length > 1 ? (
+                children.map((el, i) => (
+                  <div
+                    key={i}
+                    {...(i === 0 ? { ref: setInnerRef } : {})}
+                    style={{
+                      ...styles.evrocaCarouselItem,
+                      width: `${getCarouselItemWidth()}%`,
+                    }}
+                  >
+                    {el}
+                  </div>
+                ))
+              ) : (
+                <div ref={setInnerRef}>{children}</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
