@@ -49,18 +49,21 @@ function Carousel(_ref) {
     setChevronRightHovered = _useState14[1];
   var onScroll = function onScroll() {
     if (innerRef) {
-      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
-      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+      var innerWidth = innerRef.getBoundingClientRect().width;
+      setCurrentSlide(Math.round(outerRef.scrollLeft / innerWidth));
+      setNumSlidesOnScreen(Math.round(screenWidth / innerWidth));
     }
   };
   var changeScreenWidth = function changeScreenWidth() {
+    var outerWidth = outerRef.getBoundingClientRect().width;
     if (innerRef && outerRef) {
-      setScreenWidth(outerRef.offsetWidth);
-      setNumSlidesOnScreen(Math.round(outerRef.offsetWidth / innerRef.offsetWidth));
+      setScreenWidth(outerWidth);
+      setNumSlidesOnScreen(Math.round(outerWidth / innerRef.getBoundingClientRect().width));
     }
   };
   var chevronOnClick = function chevronOnClick(isLeft) {
-    outerRef.scrollLeft = isLeft ? (currentSlide - 1) * innerRef.offsetWidth : (currentSlide + 1) * innerRef.offsetWidth;
+    var innerWidth = innerRef.getBoundingClientRect().width;
+    outerRef.scrollLeft = isLeft ? (currentSlide - 1) * innerWidth : (currentSlide + 1) * innerWidth;
   };
   var drawChevron = function drawChevron(isLeft) {
     var conditionalStyle = isLeft ? {
@@ -98,7 +101,7 @@ function Carousel(_ref) {
     }));
   };
   var circleOnClick = function circleOnClick(index) {
-    outerRef.scrollLeft = innerRef.offsetWidth * index;
+    outerRef.scrollLeft = innerRef.getBoundingClientRect().width * index;
   };
   var getCarouselItemWidth = function getCarouselItemWidth() {
     if (numberOfSlidesOnScreen !== 4) {
@@ -110,12 +113,12 @@ function Carousel(_ref) {
     if (screenWidth < 900) {
       return 50;
     }
-    return 25;
+    return 33.33333333333333;
   };
   var getSlideTransform = function getSlideTransform(i) {
     var scale = 0.95;
-    var rotate = 5;
-    if (numSlidesOnScreen === 4) {
+    var rotate = 3;
+    if (numSlidesOnScreen === 3) {
       if (i === currentSlide) {
         return "scale(".concat(scale, ") rotateY(").concat(-rotate, "deg)");
       }

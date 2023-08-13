@@ -28,6 +28,7 @@ module.exports = {
     "react/no-array-index-key": 0,
     "no-param-reassign": 0,// for redux
     "no-shadow": 0,
+    "no-unreachable": 1,
     "arrow-body-style": ["error", "as-needed"],
     "react/no-unknown-property": 0,
   },

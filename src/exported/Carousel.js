@@ -13,24 +13,27 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
 
   const onScroll = () => {
     if (innerRef) {
-      setCurrentSlide(Math.round(outerRef.scrollLeft / innerRef.offsetWidth));
-      setNumSlidesOnScreen(Math.round(screenWidth / innerRef.offsetWidth));
+      const innerWidth = innerRef.getBoundingClientRect().width;
+      setCurrentSlide(Math.round(outerRef.scrollLeft / innerWidth));
+      setNumSlidesOnScreen(Math.round(screenWidth / innerWidth));
     }
   };
 
   const changeScreenWidth = () => {
+    const outerWidth = outerRef.getBoundingClientRect().width;
     if (innerRef && outerRef) {
-      setScreenWidth(outerRef.offsetWidth);
+      setScreenWidth(outerWidth);
       setNumSlidesOnScreen(
-        Math.round(outerRef.offsetWidth / innerRef.offsetWidth),
+        Math.round(outerWidth / innerRef.getBoundingClientRect().width),
       );
     }
   };
 
   const chevronOnClick = (isLeft) => {
+    const innerWidth = innerRef.getBoundingClientRect().width;
     outerRef.scrollLeft = isLeft
-      ? (currentSlide - 1) * innerRef.offsetWidth
-      : (currentSlide + 1) * innerRef.offsetWidth;
+      ? (currentSlide - 1) * innerWidth
+      : (currentSlide + 1) * innerWidth;
   };
 
   const drawChevron = (isLeft) => {
@@ -72,7 +75,7 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   };
 
   const circleOnClick = (index) => {
-    outerRef.scrollLeft = innerRef.offsetWidth * index;
+    outerRef.scrollLeft = innerRef.getBoundingClientRect().width * index;
   };
 
   const getCarouselItemWidth = () => {
@@ -85,13 +88,13 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
     if (screenWidth < 900) {
       return 50;
     }
-    return 25;
+    return 33.33333333333333;
   };
 
   const getSlideTransform = (i) => {
     const scale = 0.95;
-    const rotate = 5;
-    if (numSlidesOnScreen === 4) {
+    const rotate = 3;
+    if (numSlidesOnScreen === 3) {
       if (i === currentSlide) {
         return `scale(${scale}) rotateY(${-rotate}deg)`;
       }
