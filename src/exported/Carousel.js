@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./Carousel.style";
 
-export default function Carousel({ children, numberOfSlidesOnScreen }) {
+export default function Carousel({
+  children,
+  numberOfSlidesOnScreen,
+  disableRotate,
+}) {
   const [innerRef, setInnerRef] = useState(null);
   const [outerRef, setOuterRef] = useState(null);
   const [numSlidesOnScreen, setNumSlidesOnScreen] = useState(1);
@@ -102,6 +106,12 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
   const getSlideTransform = (i) => {
     const scale = 0.95;
     const rotate = 3;
+    const initStyle = "inherit";
+
+    if (disableRotate) {
+      return initStyle;
+    }
+
     if (numSlidesOnScreen === 3) {
       if (i === currentSlide) {
         return `scale(${scale}) rotateY(${-rotate}deg)`;
@@ -110,7 +120,8 @@ export default function Carousel({ children, numberOfSlidesOnScreen }) {
         return `scale(${scale}) rotateY(${rotate}deg)`;
       }
     }
-    return "inherit";
+
+    return initStyle;
   };
 
   const showCarouselTogglers = children?.length > numSlidesOnScreen;

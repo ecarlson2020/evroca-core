@@ -9,7 +9,7 @@ const root = createRoot(container);
 function App() {
   return (
     <div style={{ width: "50%" }}>
-      <Carousel>
+      <Carousel disableRotate>
         {Array(10)
           .fill(Math.random())
           .map((el) => (

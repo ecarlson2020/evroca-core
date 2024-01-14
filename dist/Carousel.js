@@ -18,7 +18,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function Carousel(_ref) {
   var children = _ref.children,
-    numberOfSlidesOnScreen = _ref.numberOfSlidesOnScreen;
+    numberOfSlidesOnScreen = _ref.numberOfSlidesOnScreen,
+    disableRotate = _ref.disableRotate;
   var _useState = (0, _react.useState)(null),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
     innerRef = _useState2[0],
@@ -125,6 +126,10 @@ function Carousel(_ref) {
   var getSlideTransform = function getSlideTransform(i) {
     var scale = 0.95;
     var rotate = 3;
+    var initStyle = "inherit";
+    if (disableRotate) {
+      return initStyle;
+    }
     if (numSlidesOnScreen === 3) {
       if (i === currentSlide) {
         return "scale(".concat(scale, ") rotateY(").concat(-rotate, "deg)");
@@ -133,7 +138,7 @@ function Carousel(_ref) {
         return "scale(".concat(scale, ") rotateY(").concat(rotate, "deg)");
       }
     }
-    return "inherit";
+    return initStyle;
   };
   var showCarouselTogglers = (children === null || children === void 0 ? void 0 : children.length) > numSlidesOnScreen;
   (0, _react.useEffect)(function () {
