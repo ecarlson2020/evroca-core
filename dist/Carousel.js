@@ -205,8 +205,10 @@ function Carousel(_ref) {
 // PropTypes
 Carousel.propTypes = {
   children: _propTypes["default"].node.isRequired,
-  numberOfSlidesOnScreen: _propTypes["default"].number
+  numberOfSlidesOnScreen: _propTypes["default"].number,
+  disableRotate: _propTypes["default"].bool
 };
 Carousel.defaultProps = {
-  numberOfSlidesOnScreen: 4
+  numberOfSlidesOnScreen: 4,
+  disableRotate: false
 };

@@ -205,7 +205,9 @@ export default function Carousel({
 Carousel.propTypes = {
   children: PropTypes.node.isRequired,
   numberOfSlidesOnScreen: PropTypes.number,
+  disableRotate: PropTypes.bool,
 };
 Carousel.defaultProps = {
   numberOfSlidesOnScreen: 4,
+  disableRotate: false,
 };
