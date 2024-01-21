@@ -48,6 +48,10 @@ function Carousel(_ref) {
     _useState14 = (0, _slicedToArray2["default"])(_useState13, 2),
     chevronRightHovered = _useState14[0],
     setChevronRightHovered = _useState14[1];
+  var _useState15 = (0, _react.useState)(null),
+    _useState16 = (0, _slicedToArray2["default"])(_useState15, 2),
+    scrollbarHeight = _useState16[0],
+    setScrollbarHeight = _useState16[1];
   var onScroll = function onScroll() {
     if (innerRef) {
       var innerWidth = innerRef.getBoundingClientRect().width;
@@ -145,6 +149,7 @@ function Carousel(_ref) {
     if (!screenWidth && outerRef) {
       changeScreenWidth();
       window.addEventListener("resize", changeScreenWidth);
+      setScrollbarHeight(outerRef.offsetHeight - outerRef.scrollHeight);
     }
     return function () {
       return window.removeEventListener("resize", changeScreenWidth);
@@ -164,7 +169,9 @@ function Carousel(_ref) {
       padding: showCarouselTogglers ? "0 40px" : ""
     })
   }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: _Carousel["default"].evrocaCarouselInner,
+    style: _objectSpread(_objectSpread({}, _Carousel["default"].evrocaCarouselInner), {}, {
+      marginBottom: scrollbarHeight ? "-".concat(scrollbarHeight, "px") : 0
+    }),
     ref: setOuterRef,
     onScroll: onScroll,
     onLoad: onScroll

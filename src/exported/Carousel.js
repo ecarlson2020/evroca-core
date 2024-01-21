@@ -14,6 +14,7 @@ export default function Carousel({
   const [screenWidth, setScreenWidth] = useState(null);
   const [chevronLeftHovered, setChevronLeftHovered] = useState(false);
   const [chevronRightHovered, setChevronRightHovered] = useState(false);
+  const [scrollbarHeight, setScrollbarHeight] = useState(null);
 
   const onScroll = () => {
     if (innerRef) {
@@ -130,6 +131,7 @@ export default function Carousel({
     if (!screenWidth && outerRef) {
       changeScreenWidth();
       window.addEventListener("resize", changeScreenWidth);
+      setScrollbarHeight(outerRef.offsetHeight - outerRef.scrollHeight);
     }
 
     return () => window.removeEventListener("resize", changeScreenWidth);
@@ -151,7 +153,10 @@ export default function Carousel({
           }}
         >
           <div
-            style={styles.evrocaCarouselInner}
+            style={{
+              ...styles.evrocaCarouselInner,
+              marginBottom: scrollbarHeight ? `-${scrollbarHeight}px` : 0,
+            }}
             ref={setOuterRef}
             onScroll={onScroll}
             onLoad={onScroll}

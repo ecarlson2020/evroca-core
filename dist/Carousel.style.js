@@ -13,7 +13,6 @@ var styles = {
     overflowX: "auto",
     overflowY: "hidden",
     scrollBehavior: "smooth",
-    marginBottom: "-15px",
     perspective: "500px"
   },
   evrocaCarouselItem: {
