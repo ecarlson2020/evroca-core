@@ -155,7 +155,7 @@ export default function Carousel({
           <div
             style={{
               ...styles.evrocaCarouselInner,
-              marginBottom: scrollbarHeight ? `-${scrollbarHeight}px` : 0,
+              marginBottom: scrollbarHeight > 0 ? `-${scrollbarHeight}px` : 0,
             }}
             ref={setOuterRef}
             onScroll={onScroll}

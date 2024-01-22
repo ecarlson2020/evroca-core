@@ -170,7 +170,7 @@ function Carousel(_ref) {
     })
   }, /*#__PURE__*/_react["default"].createElement("div", {
     style: _objectSpread(_objectSpread({}, _Carousel["default"].evrocaCarouselInner), {}, {
-      marginBottom: scrollbarHeight ? "-".concat(scrollbarHeight, "px") : 0
+      marginBottom: scrollbarHeight > 0 ? "-".concat(scrollbarHeight, "px") : 0
     }),
     ref: setOuterRef,
     onScroll: onScroll,
